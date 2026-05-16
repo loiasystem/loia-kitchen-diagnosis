@@ -1,0 +1,313 @@
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
+import OpenAI from "openai";
+import { createClient } from "@supabase/supabase-js";
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false,
+        },
+    }
+);
+
+type Ingredient = {
+    name: string;
+    code: string;
+    salty: number;
+    umami: number;
+    acid: number;
+    sweet: number;
+    bitter: number;
+    heat: number;
+    herb: number;
+    spice: number;
+    lipid: number;
+    texture: number;
+};
+
+const ingredientsPath = path.join(process.cwd(), "data/ingredients.json");
+const ingredientsText = fs.readFileSync(ingredientsPath, "utf-8");
+const testIngredients: Ingredient[] = JSON.parse(ingredientsText);
+
+const axisLabels = {
+    salty: "000 Salty / 염도",
+    umami: "100 Umami / 감칠맛",
+    acid: "200 Acid / 산미",
+    sweet: "300 Sweet / 단맛",
+    bitter: "400 Bitter / 쓴맛",
+    heat: "500 Heat / 매운맛",
+    herb: "600 Herb / 허브",
+    spice: "700 Spice / 향신료",
+    lipid: "800 Lipid / 지방감",
+    texture: "900 Texture / 질감",
+};
+
+type AxisKey = keyof typeof axisLabels;
+const aliasMap: Record<string, string> = {
+    설탕: "백설탕",
+    순후추: "통후추",
+    후추: "통후추",
+    고추: "생고추",
+    천일염: "천일 굵은 소금",
+    굵은소금: "굵은 소금",
+    가는소금: "가는 소금",
+    굵은가는소금: "굵은 소금",
+    참깨: "참깨",
+    통깨: "참깨",
+    소금: "가는 소금",
+};
+
+export async function POST(request: Request) {
+    const formData = await request.formData();
+    const inputText = String(formData.get("ingredients") || "");
+    const imageFile = formData.get("image") as File | null;
+
+    const imageInfo = imageFile
+        ? `사진 파일 수신됨: ${imageFile.name}, ${Math.round(imageFile.size / 1024)}KB`
+        : "사진 파일 없음";
+
+    let detectedIngredientText = "";
+
+    if (imageFile) {
+        const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
+        const base64Image = imageBuffer.toString("base64");
+
+        const visionResponse = await openai.responses.create({
+            model: "gpt-4.1-mini",
+            input: [
+                {
+                    role: "user",
+                    content: [
+                        {
+                            type: "input_text",
+                            text: "이 이미지는 사용자의 양념장 또는 양념 선반 사진입니다. 사진에서 읽을 수 있거나 추정 가능한 양념명만 한국어로 쉼표로 구분해서 출력하세요. 설명은 하지 마세요. 예: 간장, 고춧가루, 참기름",
+                        },
+                        {
+                            type: "input_image",
+                            image_url: `data:${imageFile.type};base64,${base64Image}`,
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        detectedIngredientText = visionResponse.output_text || "";
+        console.log("AI가 사진에서 추출한 양념명:", detectedIngredientText);
+    }
+
+    const combinedIngredientText = [inputText, detectedIngredientText]
+        .filter(Boolean)
+        .join(",");
+
+    const selectedNames = combinedIngredientText
+        ./[,\n]/)
+        .map((name: string) => name.trim())
+        .filter(Boolean)
+        .map((name: string) => aliasMap[name] || name);
+
+    const total: Record<AxisKey, number> = {
+        salty: 0,
+        umami: 0,
+        acid: 0,
+        sweet: 0,
+        bitter: 0,
+        heat: 0,
+        herb: 0,
+        spice: 0,
+        lipid: 0,
+        texture: 0,
+    };
+
+    const normalizedSelectedNames = selectedNames.map((name: string) =>
+        name.replace(/\s/g, "")
+    );
+
+    const selectedIngredients = testIngredients.filter((ingredient) => {
+        const ingredientName = ingredient.name.replace(/\s/g, "");
+        const ingredientCode = ingredient.code.replace(/\s/g, "");
+
+        return normalizedSelectedNames.some((name) =>
+            ingredientName.includes(name) ||
+            name.includes(ingredientName) ||
+            ingredientCode === name
+        );
+    });
+    const foundNames = selectedIngredients.map((ingredient) => ingredient.name);
+
+    const missingNames = selectedNames.filter(
+        (name: string) => !foundNames.includes(name)
+    );
+
+    for (const ingredient of selectedIngredients) {
+        total.salty += ingredient.salty;
+        total.umami += ingredient.umami;
+        total.acid += ingredient.acid;
+        total.sweet += ingredient.sweet;
+        total.bitter += ingredient.bitter;
+        total.heat += ingredient.heat;
+        total.herb += ingredient.herb;
+        total.spice += ingredient.spice;
+        total.lipid += ingredient.lipid;
+        total.texture += ingredient.texture;
+    }
+    const ingredientCount =
+
+        selectedIngredients.length || 1;
+
+    Object.keys(total).forEach((key) => {
+
+        total[key as AxisKey] =
+
+            Math.round(
+
+                total[key as AxisKey] / ingredientCount
+
+            );
+
+    });
+
+    const sortedAxes = Object.entries(total).sort((a, b) => b[1] - a[1]) as [
+        AxisKey,
+        number
+    ][];
+
+    const strongAxes = sortedAxes
+        .filter(([, score]) => score >= 50)
+        .map(([axis]) => axisLabels[axis]);
+
+    const supportingAxes = sortedAxes
+        .filter(([, score]) => score >= 10 && score < 50)
+        .map(([axis]) => axisLabels[axis]);
+
+    const weakAxes = sortedAxes
+        .filter(([, score]) => score === 0)
+        .slice(0, 2)
+        .map(([axis]) => axisLabels[axis]);
+    const recommendationMap: Record<string, string> = {
+        "salty": "염도 축이 약합니다. 소금, 간장, 액젓처럼 염도를 직접 보완하는 재료를 고려해보세요.",
+        "umami": "감칠맛 축이 약합니다. 간장, 된장, 다시다, 버섯, 다시마 계열을 보완하면 맛의 바닥이 안정됩니다.",
+        "acid": "산미 축이 약합니다. 식초, 레몬즙, 라임, 발사믹식초 같은 산미 재료를 추가하면 음식이 더 가볍고 선명해집니다.",
+        "sweet": "단맛 축이 약합니다. 설탕, 꿀, 올리고당처럼 맛을 둥글게 잡아주는 재료를 보완해보세요.",
+        "bitter": "쓴맛 축이 약합니다. 쓴맛은 반드시 많이 필요하진 않지만, 커피·카카오·구운 향 계열이 있으면 맛의 깊이가 생깁니다.",
+        "heat": "매운맛/자극 축이 약합니다. 고춧가루, 후추, 생강, 겨자 계열을 보완하면 맛의 긴장감이 생깁니다.",
+        "herb": "허브 축이 약합니다. 파슬리, 바질, 딜, 고수 같은 허브류를 추가하면 향이 더 입체적입니다.",
+        "spice": "향신료 축이 약합니다. 큐민, 파프리카, 계피, 카레가루 같은 향신료를 보완하면 맛의 개성이 강해집니다.",
+        "lipid": "지방감 축이 약합니다. 참기름, 들기름, 올리브유, 버터 같은 지방 재료를 보완하면 풍미 전달력이 좋아집니다.",
+        "texture": "질감 축이 약합니다. 깨, 빵가루, 튀김가루, 전분처럼 식감을 만드는 재료를 추가하면 음식의 완성감이 올라갑니다.",
+    };
+
+    const recommendation = weakAxes.map((axisKey) => {
+        const normalizedKey = axisKey.toLowerCase();
+
+        if (normalizedKey.includes("acid")) {
+            return recommendationMap["acid"];
+        }
+
+        if (normalizedKey.includes("sweet")) {
+            return recommendationMap["sweet"];
+        }
+
+        if (normalizedKey.includes("bitter")) {
+            return recommendationMap["bitter"];
+        }
+
+        if (normalizedKey.includes("heat")) {
+            return recommendationMap["heat"];
+        }
+
+        if (normalizedKey.includes("herb")) {
+            return recommendationMap["herb"];
+        }
+
+        if (normalizedKey.includes("spice")) {
+            return recommendationMap["spice"];
+        }
+
+        if (normalizedKey.includes("lipid")) {
+            return recommendationMap["lipid"];
+        }
+
+        if (normalizedKey.includes("texture")) {
+            return recommendationMap["texture"];
+        }
+
+        return null;
+    });
+    console.log("recommendation:", recommendation);
+
+    const mainAxis = strongAxes[0] || "";
+
+    const kitchenType = mainAxis.includes("Salty")
+        ? "염도 중심형 주방"
+        : mainAxis.includes("Umami")
+            ? "감칠맛 중심형 주방"
+            : mainAxis.includes("Acid")
+                ? "산미 중심형 주방"
+                : mainAxis.includes("Sweet")
+                    ? "단맛 중심형 주방"
+                    : mainAxis.includes("Bitter")
+                        ? "쓴맛 중심형 주방"
+                        : mainAxis.includes("Heat")
+                            ? "매운맛 중심형 주방"
+                            : mainAxis.includes("Herb")
+                                ? "허브 중심형 주방"
+                                : mainAxis.includes("Spice")
+                                    ? "향신료 중심형 주방"
+                                    : mainAxis.includes("Lipid")
+                                        ? "지방감 중심형 주방"
+                                        : mainAxis.includes("Texture")
+                                            ? "질감 중심형 주방"
+                                            : "LOIA 진단형 주방";
+    const result = {
+        kitchenType,
+        strongAxes,
+        supportingAxes,
+        weakAxes,
+        scores: total,
+        recommendation,
+        summary:
+            selectedIngredients.length > 0
+                ? `찾은 재료: ${foundNames.join(", ")}
+찾지 못한 재료: ${missingNames.length > 0 ? missingNames.join(", ") : "없음"}
+사진 파일: ${imageInfo}
+분석 방식: 찾은 재료의 맛 축 점수를 합산한 뒤 강한 축, 보조 축, 부족한 축을 계산했습니다.`
+                : `찾은 재료: 없음
+찾지 못한 재료: ${missingNames.length > 0 ? missingNames.join(", ") : "없음"}
+사진 파일: ${imageInfo}
+분석 방식: 입력된 재료 중 DB에서 찾을 수 있는 재료가 없습니다.`,
+    };
+
+    const isTest =
+        request.headers.get("host")?.includes("localhost");
+
+    const { error: insertError } = await supabase
+        .from("loia_diagnosis_logs")
+        .insert({
+            user_input: inputText,
+            ai_detected: detectedIngredientText,
+            found_ingredients: foundNames,
+            missing_ingredients: missingNames,
+            strong_axes: strongAxes,
+            supporting_axes: supportingAxes,
+            weak_axes: weakAxes,
+            summary: result.summary,
+            is_test: isTest,
+        });
+
+    if (insertError) {
+        console.error("Supabase 저장 실패:", insertError);
+    }
+
+    return NextResponse.json(result);
+
+
+}

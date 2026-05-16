@@ -1,0 +1,57 @@
+[
+  {
+    "alias": "발사믹",
+    "standard": "발사믹식초",
+    "note": "shorthand"
+  },
+  {
+    "alias": "백후추",
+    "standard": "화이트페퍼",
+    "note": "영문 alias"
+  },
+  {
+    "alias": "순후추",
+    "standard": "후추",
+    "note": "제품 표현"
+  },
+  {
+    "alias": "마늘가루",
+    "standard": "마늘분말",
+    "note": "동의 표현"
+  },
+  {
+    "alias": "양파가루",
+    "standard": "양파분말",
+    "note": "동의 표현"
+  },
+  {
+    "alias": "매실액",
+    "standard": "매실청",
+    "note": "생활 표현"
+  },
+  {
+    "alias": "흑후추",
+    "standard": "후추",
+    "note": "색상 표현"
+  },
+  {
+    "alias": "레드페퍼",
+    "standard": "고춧가루",
+    "note": "영문 표현"
+  },
+  {
+    "alias": "올리브오일",
+    "standard": "올리브유",
+    "note": "영문 표현"
+  },
+  {
+    "alias": "들깨가루",
+    "standard": "들깨",
+    "note": "state 표현"
+  },
+  {
+    "alias": "미원",
+    "standard": "MSG",
+    "note": "브랜드 표현"
+  }
+]
