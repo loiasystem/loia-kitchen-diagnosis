@@ -250,6 +250,28 @@ export default function Home() {
     })()
     : {};
 
+  const flavorSpectrum = result?.scores
+    ? (() => {
+      const values = Object.values(result.scores).map(Number);
+
+      const average =
+        values.reduce((a, b) => a + b, 0) / values.length;
+
+      const variance =
+        values.reduce(
+          (sum, value) => sum + Math.pow(value - average, 2),
+          0
+        ) / values.length;
+
+      const balanceScore = Math.max(
+        0,
+        10 - variance / 200
+      );
+
+      return balanceScore.toFixed(1);
+    })()
+    : "0.0";
+
   return (
     <main className="min-h-screen bg-[#f4efe6] text-[#1f1a14]">
       <section className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-12">
@@ -270,183 +292,252 @@ export default function Home() {
           </p>
         </header>
 
-        <div className="grid gap-8 md:grid-cols-[1fr_1fr]">
-          <section className="rounded-3xl border border-[#ded5c8] bg-white/70/70 p-6 shadow-2xl">
-            <h2 className="mb-4 text-xl font-medium">1. 사진 업로드</h2>
-            <div className="mb-5">
-              <label className="mb-2 block text-sm text-neutral-400">
-                사진이 없거나, 사진에서 잘 안 보이는 양념은 직접 입력해주세요
-              </label>
-              <textarea
-                value={ingredientInput}
-                onChange={(event) => setIngredientInput(event.target.value)}
-                placeholder="예: 간장, 고춧가루, 참기름, 굴소스, 식초"
-                className="min-h-24 w-full rounded-2xl border border-neutral-800 bg-white p-4 text-[#1f1a14] outline-none placeholder:text-[#9a9084] focus:border-neutral-500"
-              />
-            </div>
-
-
-
-
-
-            <label className="flex min-h-72 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#ded5c8] bg-[#f8f4ec] p-6 text-center hover:border-[#b9aa98]">
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="업로드한 양념장 사진"
-                  className="max-h-72 rounded-2xl object-contain"
+        {!result ? (
+          <div className="mx-auto max-w-2xl">
+            <section className="rounded-3xl border border-[#ded5c8] bg-white/70/70 p-6 shadow-2xl">
+              <h2 className="mb-4 text-xl font-medium">1. 사진 업로드</h2>
+              <div className="mb-5">
+                <label className="mb-2 block text-sm text-neutral-400">
+                  사진이 없거나, 사진에서 잘 안 보이는 양념은 직접 입력해주세요
+                </label>
+                <textarea
+                  value={ingredientInput}
+                  onChange={(event) => setIngredientInput(event.target.value)}
+                  placeholder="예: 간장, 고춧가루, 참기름, 굴소스, 식초"
+                  className="min-h-24 w-full rounded-2xl border border-neutral-800 bg-white p-4 text-[#1f1a14] outline-none placeholder:text-[#9a9084] focus:border-neutral-500"
                 />
-              ) : (
-                <div>
-                  <p className="text-lg font-medium">양념장 사진 선택</p>
-                  <p className="mt-2 text-sm text-neutral-500">
-                    양념병 이름이나 라벨이 보이도록 밝은 곳에서 촬영해주세요.<br />
-                    사진이 흐리거나 라벨이 가려져 있으면 일부 양념을 인식하지 못할 수 있습니다.
-                  </p>
-                </div>
-              )}
-
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
-            </label>
-
-            <button
-              onClick={handleAnalyze}
-              disabled={isAnalyzing}
-              className="mt-6 w-full rounded-2xl border border-[#1f1a14] bg-neutral-100 px-5 py-4 font-semibold text-neutral-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {isAnalyzing ? "분석 중..." : "내 양념장 진단 시작하기"}
-            </button>
-            <button
-              onClick={() => setResult(null)}
-              className="mt-4 w-full rounded-xl bg-neutral-900 py-3 text-white"
-            >
-              새로 진단하기
-            </button>
-
-          </section>
-
-          <section className="rounded-3xl border border-[#ded5c8] bg-white/70 p-6 shadow-2xl">
-            <h2 className="mb-4 text-xl font-medium">2. 진단 결과</h2>
-
-            {!result ? (
-              <div className="flex min-h-72 flex-col items-center justify-center gap-4 rounded-2xl bg-[#f8f4ec] p-6 text-center text-[#5f574d]">
-                사진을 업로드하고 진단 버튼을 누르면 결과가 표시됩니다.
-                {savedResult && (
-                  <button
-                    onClick={() => setResult(savedResult)}
-                    className="mt-4 rounded-xl bg-[#1f1a14] px-5 py-3 text-sm font-semibold text-white"
-                  >
-                    지난 진단 결과 보기
-                  </button>
-                )}
               </div>
 
-            ) : (
-              <div className="space-y-6">
-                <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                  <p className="mb-2 text-sm text-[#5f574d]">주방 타입</p>
-                  <h3 className="text-2xl font-semibold">{result.kitchenType}</h3>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-3">
-                  <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                    <p className="mb-3 text-sm text-[#5f574d]">강한 맛 축</p>
-                    <ul className="space-y-2">
-                      {result.strongAxes.map((axis) => (
-                        <li key={axis}>• {axis}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                    <p className="mb-3 text-sm text-[#5f574d]">보조 맛 축</p>
-                    <ul className="space-y-2">
-                      {result.supportingAxes.length > 0 ? (
-                        result.supportingAxes.map((axis) => <li key={axis}>• {axis}</li>)
-                      ) : (
-                        <li className="text-[#5f574d]">뚜렷한 보조 축 없음</li>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                    <p className="mb-3 text-sm text-[#5f574d]">부족한 맛 축</p>
-                    <ul className="space-y-2">
-                      {result.weakAxes.map((axis) => (
-                        <li key={axis}>• {axis}</li>
-                      ))}
-                    </ul>
-
-                  </div>
-                </div>
-                <div className="rounded-2xl bg-[#f8f4ec] p-5 mb-4">
-                  <p className="text-sm text-[#5f574d]">
-                    Kitchen Level
-                  </p>
-
-                  <h2 className="mt-2 text-3xl font-bold">
-                    Lv.{flavorLevel}
-                  </h2>
-
-                  <p className="mt-1 text-[#1f1a14]">
-                    {levelTitle}
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-[#f8f4ec] p-5 mb-4">
-                  <p className="text-sm text-[#5f574d]">
-                    Flavor Title
-                  </p>
-
-                  <h2 className="mt-2 text-2xl font-bold">
-                    {flavorTitle}
-                  </h2>
-                </div>
-
-                {previousResult && (
-                  <div className="rounded-2xl bg-[#f8f4ec] p-5 mb-4">
-                    <p className="text-sm text-[#1f1a14]">
-                      이전 진단과 비교
+              <label className="flex min-h-72 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#ded5c8] bg-[#f8f4ec] p-6 text-center hover:border-[#b9aa98]">
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="업로드한 양념장 사진"
+                    className="max-h-72 rounded-2xl object-contain"
+                  />
+                ) : (
+                  <div>
+                    <p className="text-lg font-medium">양념장 사진 선택</p>
+                    <p className="mt-2 text-sm text-neutral-500">
+                      양념병 이름이나 라벨이 보이도록 밝은 곳에서 촬영해주세요.<br />
+                      사진이 흐리거나 라벨이 가려져 있으면 일부 양념을 인식하지 못할 수 있습니다.
                     </p>
-
-                    <div className="mt-3 space-y-1">
-                      {flavorDiffs.map((item) => (
-                        <p key={item.label}>
-                          {item.label}{" "}
-                          {item.diff > 0 ? "▲" : "▼"}{" "}
-                          {item.diff > 0 ? "+" : "-"}
-                          {Math.abs(item.diff)}
-                        </p>
-                      ))}
-                    </div>
                   </div>
                 )}
 
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </label>
+
+              <button
+                onClick={handleAnalyze}
+                disabled={isAnalyzing}
+                className="mt-6 w-full rounded-2xl border border-[#1f1a14] bg-neutral-100 px-5 py-4 font-semibold text-neutral-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isAnalyzing ? "분석 중..." : "내 양념장 진단 시작하기"}
+              </button>
+              <button
+                onClick={() => setResult(null)}
+                className="mt-4 w-full rounded-xl bg-neutral-900 py-3 text-white"
+              >
+                새로 진단하기
+              </button>
+            </section>
+          </div>
+        ) : (
+
+          <section className="mx-auto max-w-5xl rounded-3xl border border-[#ded5c8] bg-white/70 p-6 shadow-2xl">
+            <h2 className="mb-4 text-xl font-medium">2. 진단 결과</h2>
+
+            <div className="space-y-8">
+              <div className="grid gap-6 md:grid-cols-[1.4fr_0.9fr] items-center">
+
+                <h1 className="mt-3 text-4xl font-bold leading-tight text-[#1f1a14] md:text-5xl">
+                  {result.kitchenType}
+                </h1>
+
+                <p className="mt-4 text-2xl italic text-[#5f574d]">
+                  {flavorTitle}
+                </p>
+
+                <p className="mt-3 text-base leading-7 text-[#7a746b]">
+                  강한 Heat / Umami 축 중심 구조
+                </p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
+                  <div>
+                    <p className="text-sm text-[#1f1a14]">
+                      보유 양념
+                    </p>
+
+                    <p className="text-xs tracking-wide text-[#7a746b]">
+                      Ingredient Collection
+                    </p>
+                  </div>
+
+                  <div className="mt-3 flex items-end gap-2">
+                    <span className="text-5xl font-bold text-[#1f1a14]">
+                      {ingredientCount}
+                    </span>
+
+                    <span className="mb-1 text-sm text-[#7a746b]">
+                      종
+                    </span>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
+                  <p className="text-sm text-[#7a746b]">
+                    Flavor Spectrum
+                  </p>
+
+                  <div className="mt-3 flex items-end gap-2">
+                    <span className="text-5xl font-bold text-[#1f1a14]">
+                      {flavorSpectrum}
+                    </span>
+
+                    <span className="mb-1 text-sm text-[#7a746b]">
+                      /10
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="mt-8 grid gap-8 grid-cols-[1.2fr_0.8fr] items-start">
 
                 <FlavorRadar
                   scores={normalizedScores}
                   previousScores={previousResult?.scores}
                 />
 
+                <div className="space-y-4">
+                  <div className="rounded-2xl bg-white/40 p-6 border border-[#ece4d8] space-y-6">
 
+                    <div>
+                      <p className="text-sm font-semibold text-[#c06b2d] mb-3">
+                        PRIMARY (핵심 축)
+                      </p>
+
+                      <ul className="space-y-2">
+                        {result.strongAxes.map((axis) => (
+                          <li key={axis} className="flex items-center gap-3">
+                            <span className="font-semibold">
+                              {axis.split(" ")[0]}
+                            </span>
+
+                            <span className="uppercase tracking-wide">
+                              {axis.split(" ")[1]?.split("/")[0]}
+                            </span>
+
+                            <span className="text-[#7a746b]">
+                              / {axis.split("/")[1]}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="border-t border-[#ece4d8] pt-6">
+                      <p className="text-sm font-semibold text-[#6f8b55] mb-3">
+                        SECONDARY (보조 축)
+                      </p>
+
+                      <ul className="space-y-2">
+                        {result.supportingAxes.length > 0 ? (
+                          result.supportingAxes.map((axis) => (
+                            <li key={axis} className="flex items-center gap-3">
+                              <span className="font-semibold">
+                                {axis.split(" ")[0]}
+                              </span>
+
+                              <span className="uppercase tracking-wide">
+                                {axis.split(" ")[1]?.split("/")[0]}
+                              </span>
+
+                              <span className="text-[#7a746b]">
+                                / {axis.split("/")[1]}
+                              </span>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="text-[#5f574d]">
+                            뚜렷한 보조 축 없음
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+
+                    <div className="border-t border-[#ece4d8] pt-6">
+                      <p className="text-sm font-semibold text-[#4d73b8] mb-3">
+                        EXPANSION (확장 가능 축)
+                      </p>
+
+                      <ul className="space-y-2">
+                        {result.weakAxes.map((axis) => (
+                          <li key={axis} className="flex items-center gap-3">
+                            <span className="font-semibold">
+                              {axis.split(" ")[0]}
+                            </span>
+
+                            <span className="uppercase tracking-wide">
+                              {axis.split(" ")[1]?.split("/")[0]}
+                            </span>
+
+                            <span className="text-[#7a746b]">
+                              / {axis.split("/")[1]}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+
+              {previousResult && (
+                <div className="rounded-xl border border-[#ded5c8] p-4 mb-4">
+                  <p className="text-xs uppercase tracking-[0.15em] text-[#7a746b]">
+                    이전 진단과 비교
+                  </p>
+
+                  <div className="mt-3 space-y-1">
+                    {flavorDiffs.map((item) => (
+                      <p key={item.label}>
+                        {item.label}{" "}
+                        {item.diff > 0 ? "▲" : "▼"}{" "}
+                        {item.diff > 0 ? "+" : "-"}
+                        {Math.abs(item.diff)}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
                 <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                  <p className="mb-3 text-sm text-[#5f574d]">분석 요약</p>
+                  <p className="mb-3 text-sm text-[#5f574d]">주방 성향 해석</p>
                   <ul className="space-y-2 text-[#1f1a14]">
                     {result.summary?.split("\n").map((line) => (
-                    <li key={line} className="flex gap-2 leading-7">
-                      <span className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#5f574d]" />
-                      <span>{line}</span>
-                    </li>
+                      <li key={line} className="flex gap-2 leading-7">
+                        <span className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#5f574d]" />
+                        <span>{line}</span>
+                      </li>
                     ))}
                   </ul>
-
                 </div>
 
                 <div className="rounded-2xl bg-[#f8f4ec] p-5">
-                  <p className="mb-3 text-sm text-[#5f574d]">추천 보완</p>
+                  <p className="mb-3 text-sm text-[#5f574d]">새로운 맛 세계 제안</p>
                   <ul className="space-y-2 text-[#1f1a14]">
                     {result.recommendation.map((item, i) => (
                       <li key={`${item}-${i}`} className="flex gap-2 leading-7">
@@ -457,191 +548,10 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-            )}
+            </div>
           </section>
-        </div>
+        )}
 
-        <button
-          type="button"
-          onClick={async () => {
-            const currentResult = result as any;
-
-            const strongAxesText =
-              currentResult?.strongAxes?.length > 0
-                ? currentResult.strongAxes.join(", ")
-                : "없음";
-
-            const supportingAxesText =
-              currentResult?.supportingAxes?.length > 0
-                ? currentResult.supportingAxes.join(", ")
-                : "없음";
-
-            const weakAxesText =
-              currentResult?.weakAxes?.length > 0
-                ? currentResult.weakAxes.join(", ")
-                : "없음";
-
-            const kitchenType =
-              currentResult?.kitchenType ||
-              currentResult?.kitchen_type ||
-              currentResult?.type ||
-              "LOIA 진단형 주방";
-
-            const shareText = [
-              `내 주방은 ${kitchenType}입니다.`,
-              "",
-              `강한 맛 축: ${strongAxesText}`,
-              `보조 맛 축: ${supportingAxesText}`,
-              `부족한 맛 축: ${weakAxesText}`,
-              "",
-              "당신의 양념장은 어떤 맛 구조일까?",
-            ].join("\n");
-
-            const shareData = {
-              title: "LOIA Kitchen Diagnosis",
-              text: shareText,
-              url: "https://loia-kitchen-diagnosis.vercel.app/",
-            };
-
-            try {
-              const nav = navigator as Navigator & {
-                share?: (data: ShareData) => Promise<void>;
-              };
-
-              if (nav.share) {
-                await nav.share(shareData);
-              } else if (navigator.clipboard) {
-                await navigator.clipboard.writeText(
-                  `${shareText}
-
-${shareData.url}`
-                );
-                alert("공유 문구와 링크가 복사되었습니다.");
-              } else {
-                alert("공유 기능을 사용할 수 없습니다. 주소창의 링크를 직접 복사해주세요.");
-              }
-            } catch (error) {
-              console.log("공유가 취소되었거나 실패했습니다.", error);
-            }
-          }}
-          className="mt-8 w-full rounded-full bg-white px-5 py-4 text-sm font-semibold text-black hover:bg-neutral-200"
-        >
-          친구에게 공유하기
-        </button>
-
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          <button
-            type="button"
-            onClick={() => {
-              const currentResult = result as any;
-
-              const strongAxesText =
-                currentResult?.strongAxes?.length > 0
-                  ? currentResult.strongAxes.join(", ")
-                  : "없음";
-
-              const supportingAxesText =
-                currentResult?.supportingAxes?.length > 0
-                  ? currentResult.supportingAxes.join(", ")
-                  : "없음";
-
-              const weakAxesText =
-                currentResult?.weakAxes?.length > 0
-                  ? currentResult.weakAxes.join(", ")
-                  : "없음";
-
-              const kitchenType =
-                currentResult?.kitchenType ||
-                currentResult?.kitchen_type ||
-                currentResult?.type ||
-                "LOIA 진단형 주방";
-
-              const canvas = document.createElement("canvas");
-              const ctx = canvas.getContext("2d");
-
-              if (!ctx) {
-                alert("스토리 이미지를 만들 수 없습니다.");
-                return;
-              }
-
-              canvas.width = 1080;
-              canvas.height = 1920;
-
-              ctx.fillStyle = "#050505";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-              ctx.fillStyle = "#737373";
-              ctx.font = "28px sans-serif";
-              ctx.fillText("LOIA KITCHEN DIAGNOSIS", 80, 140);
-
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "bold 68px sans-serif";
-              ctx.fillText("내 주방은", 80, 300);
-              ctx.fillText(kitchenType, 80, 390);
-              ctx.fillText("입니다.", 80, 480);
-
-              ctx.strokeStyle = "#404040";
-              ctx.lineWidth = 2;
-              ctx.strokeRect(80, 600, 920, 680);
-
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("강한 맛 축", 120, 700);
-
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(strongAxesText, 120, 770);
-
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("보조 맛 축", 120, 900);
-
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(supportingAxesText, 120, 970);
-
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("부족한 맛 축", 120, 1080);
-
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(weakAxesText, 120, 1150);
-
-              ctx.fillStyle = "#737373";
-              ctx.font = "30px sans-serif";
-              ctx.fillText("당신의 양념장은", 80, 1560);
-              ctx.fillText("어떤 맛 구조일까?", 80, 1610);
-
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "bold 52px sans-serif";
-              ctx.fillText("LOIA", 80, 1760);
-
-              ctx.fillStyle = "#737373";
-              ctx.font = "26px sans-serif";
-              ctx.fillText("Kitchen Diagnosis Beta", 80, 1810);
-
-              const imageUrl = canvas.toDataURL("image/png");
-
-              const link = document.createElement("a");
-              link.href = imageUrl;
-              link.download = "loia-story-diagnosis.png";
-              link.click();
-            }}
-            className="rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
-          >
-            스토리 이미지 저장
-          </button>
-
-          <a
-            href="https://www.instagram.com/loia.system/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
-          >
-            LOIA Instagram
-          </a>
-        </div>
 
         {recommendedItems.length > 0 && (
           <section className="mt-8 rounded-3xl border border-[#ded5c8] bg-white/70 p-5">
@@ -657,7 +567,7 @@ ${shareData.url}`
               부족한 맛 축을 기준으로 지금 주방에 더하면 좋은 양념을 추천합니다.
             </p>
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-4">
               {recommendedItems.slice(0, 6).map((item) => {
                 const naverUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(
                   item.naverKeyword
@@ -672,7 +582,7 @@ ${shareData.url}`
                     key={`${item.axisCode}-${item.itemName}`}
                     className="rounded-2xl border border-[#ded5c8] bg-[#f8f4ec] p-4"
                   >
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center justify-between gap-3">
                       <div>
                         <p className="text-sm font-semibold text-[#1f1a14]">
                           {item.itemName}
@@ -754,6 +664,187 @@ ${shareData.url}`
           </section>
         )}
 
+        <div className="mt-6 grid grid-cols-3 gap-3 items-center">
+
+            <button
+              type="button"
+              onClick={() => {
+                const currentResult = result as any;
+
+                const strongAxesText =
+                  currentResult?.strongAxes?.length > 0
+                    ? currentResult.strongAxes.join(", ")
+                    : "없음";
+
+                const supportingAxesText =
+                  currentResult?.supportingAxes?.length > 0
+                    ? currentResult.supportingAxes.join(", ")
+                    : "없음";
+
+                const weakAxesText =
+                  currentResult?.weakAxes?.length > 0
+                    ? currentResult.weakAxes.join(", ")
+                    : "없음";
+
+                const kitchenType =
+                  currentResult?.kitchenType ||
+                  currentResult?.kitchen_type ||
+                  currentResult?.type ||
+                  "LOIA 진단형 주방";
+
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                if (!ctx) {
+                  alert("스토리 이미지를 만들 수 없습니다.");
+                  return;
+                }
+
+                canvas.width = 1080;
+                canvas.height = 1920;
+
+                ctx.fillStyle = "#050505";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = "#737373";
+                ctx.font = "28px sans-serif";
+                ctx.fillText("LOIA KITCHEN DIAGNOSIS", 80, 140);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 68px sans-serif";
+                ctx.fillText("내 주방은", 80, 300);
+                ctx.fillText(kitchenType, 80, 390);
+                ctx.fillText("입니다.", 80, 480);
+
+                ctx.strokeStyle = "#404040";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(80, 600, 920, 680);
+
+                ctx.fillStyle = "#a3a3a3";
+                ctx.font = "32px sans-serif";
+                ctx.fillText("강한 맛 축", 120, 700);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "34px sans-serif";
+                ctx.fillText(strongAxesText, 120, 770);
+
+                ctx.fillStyle = "#a3a3a3";
+                ctx.font = "32px sans-serif";
+                ctx.fillText("보조 맛 축", 120, 900);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "34px sans-serif";
+                ctx.fillText(supportingAxesText, 120, 970);
+
+                ctx.fillStyle = "#a3a3a3";
+                ctx.font = "32px sans-serif";
+                ctx.fillText("부족한 맛 축", 120, 1080);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "34px sans-serif";
+                ctx.fillText(weakAxesText, 120, 1150);
+
+                ctx.fillStyle = "#737373";
+                ctx.font = "30px sans-serif";
+                ctx.fillText("당신의 양념장은", 80, 1560);
+                ctx.fillText("어떤 맛 구조일까?", 80, 1610);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 52px sans-serif";
+                ctx.fillText("LOIA", 80, 1760);
+
+                ctx.fillStyle = "#737373";
+                ctx.font = "26px sans-serif";
+                ctx.fillText("Kitchen Diagnosis Beta", 80, 1810);
+
+                const imageUrl = canvas.toDataURL("image/png");
+
+                const link = document.createElement("a");
+                link.href = imageUrl;
+                link.download = "loia-story-diagnosis.png";
+                link.click();
+              }}
+              className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
+            >
+              스토리 이미지 저장
+            </button>
+
+            <button type="button"
+              onClick={async () => {
+                const currentResult = result as any;
+
+                const strongAxesText =
+                  currentResult?.strongAxes?.length > 0
+                    ? currentResult.strongAxes.join(", ")
+                    : "없음";
+
+                const supportingAxesText =
+                  currentResult?.supportingAxes?.length > 0
+                    ? currentResult.supportingAxes.join(", ")
+                    : "없음";
+
+                const weakAxesText =
+                  currentResult?.weakAxes?.length > 0
+                    ? currentResult.weakAxes.join(", ")
+                    : "없음";
+
+                const kitchenType =
+                  currentResult?.kitchenType ||
+                  currentResult?.kitchen_type ||
+                  currentResult?.type ||
+                  "LOIA 진단형 주방";
+
+                const shareText = [
+                  `내 주방은 ${kitchenType}입니다.`,
+                  "",
+                  `강한 맛 축: ${strongAxesText}`,
+                  `보조 맛 축: ${supportingAxesText}`,
+                  `부족한 맛 축: ${weakAxesText}`,
+                  "",
+                  "당신의 양념장은 어떤 맛 구조일까?",
+                ].join("\n");
+
+                const shareData = {
+                  title: "LOIA Kitchen Diagnosis",
+                  text: shareText,
+                  url: "https://loia-kitchen-diagnosis.vercel.app/",
+                };
+
+                try {
+                  const nav = navigator as Navigator & {
+                    share?: (data: ShareData) => Promise<void>;
+                  };
+
+                  if (nav.share) {
+                    await nav.share(shareData);
+                  } else if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(
+                      `${shareText}
+
+                  ${shareData.url}`
+                    );
+                    alert("공유 문구와 링크가 복사되었습니다.");
+                  } else {
+                    alert("공유 기능을 사용할 수 없습니다. 주소창의 링크를 직접 복사해주세요.");
+                  }
+                } catch (error) {
+                  console.log("공유가 취소되었거나 실패했습니다.", error);
+                }
+              }}
+              className="w-full rounded-full bg-[#1f1a14] px-5 py-4 text-white font-semibold text-black hover:bg-[#3a3027] transition-colors duration-200">
+              친구에게 공유하기
+            </button>
+
+            <a
+              href="https://www.instagram.com/loia.system/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white">
+              LOIA Instagram
+            </a>
+
+        </div>
+
         <footer className="mt-12 border-t border-neutral-800 pt-6 text-sm text-neutral-600">
           <p className="mt-8 whitespace-pre-line text-xs leading-6 text-neutral-500">
             {`현재 LOIA Kitchen Diagnosis는 베타 테스트 버전입니다.
@@ -763,6 +854,6 @@ ${shareData.url}`
           </p>
         </footer>
       </section>
-    </main>
+    </main >
   );
 }

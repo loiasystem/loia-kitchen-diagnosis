@@ -24,8 +24,8 @@ export default function FlavorRadar({ scores, previousScores }) {
     const hasPrevious = !!previousScores;
 
     return (
-        <div style={{ width: "100%", height: "430px" }}>
-            <div style={{ width: "100%", height: "380px" }}>
+        <div style={{ width: "100%", height: "420px" }}>
+            <div style={{ width: "100%", height: "360px" }}>
                 <ResponsiveContainer>
                     <RadarChart data={data}>
                         <PolarGrid />
