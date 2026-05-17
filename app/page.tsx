@@ -156,7 +156,12 @@ export default function Home() {
     setIsAnalyzing(true);
     try {
       const formData = new FormData();
-      formData.append("ingredients", ingredientInput);
+      const normalizedIngredients = ingredientInput
+        .replace(/[.\n\/]/g, ",")
+        .replace(/,+/g, ",")
+        .trim();
+
+      formData.append("ingredients", normalizedIngredients);
 
       if (selectedImageFile) {
         formData.append("image", selectedImageFile);
@@ -274,87 +279,111 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#f4efe6] text-[#1f1a14]">
-      <section className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-12">
-        <header className="mb-12">
-          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-neutral-500">
-            LOIA Kitchen Diagnosis
-          </p>
 
-          <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
-            우리 집 양념장은
-            <br />
-            어떤 맛 구조일까?
-          </h1>
+      <header className="sticky top-0 z-50 border-b border-[#ded5c8] bg-[#f4efe6]/90 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f574d]">
-            가지고 있는 양념을 입력하거나 양념 선반 사진을 올리면
-            우리 집 맛이 어디로 치우쳤는지 보여줍니다.
-          </p>
-        </header>
+          <div>
+            <p className="text-3xl font-semibold tracking-[0.12em]">
+              LOIA
+            </p>
+
+            <p className="text-[10px] tracking-[0.25em] text-[#7a746b]">
+              KITCHEN DIAGNOSIS
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              setResult(null);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="rounded-full border border-[#1f1a14] px-5 py-2 text-sm font-medium hover:bg-[#1f1a14] hover:text-white transition-colors duration-200"
+          >
+            다시 진단하기
+          </button>
+
+        </div>
+      </header>
+
+      <section className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 pt-8 pb-52">
 
         {!result ? (
-          <div className="mx-auto max-w-2xl">
-            <section className="rounded-3xl border border-[#ded5c8] bg-white/70/70 p-6 shadow-2xl">
-              <h2 className="mb-4 text-xl font-medium">1. 사진 업로드</h2>
-              <div className="mb-5">
-                <label className="mb-2 block text-sm text-neutral-400">
-                  사진이 없거나, 사진에서 잘 안 보이는 양념은 직접 입력해주세요
-                </label>
-                <textarea
-                  value={ingredientInput}
-                  onChange={(event) => setIngredientInput(event.target.value)}
-                  placeholder="예: 간장, 고춧가루, 참기름, 굴소스, 식초"
-                  className="min-h-24 w-full rounded-2xl border border-neutral-800 bg-white p-4 text-[#1f1a14] outline-none placeholder:text-[#9a9084] focus:border-neutral-500"
-                />
-              </div>
+          <>
+            <header className="mb-12">
+              <p className="mb-3 text-sm uppercase tracking-[0.35em] text-neutral-500">
+                LOIA Kitchen Diagnosis
+              </p>
 
-              <label className="flex min-h-72 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#ded5c8] bg-[#f8f4ec] p-6 text-center hover:border-[#b9aa98]">
-                {imagePreview ? (
-                  <img
-                    src={imagePreview}
-                    alt="업로드한 양념장 사진"
-                    className="max-h-72 rounded-2xl object-contain"
+              <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
+                우리 집 양념장은
+                <br />
+                어떤 맛 구조일까?
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f574d]">
+                가지고 있는 양념을 입력하거나 양념 선반 사진을 올리면
+                우리 집 맛이 어디로 치우쳤는지 보여줍니다.
+              </p>
+            </header>
+            <div className="mx-auto max-w-2xl">
+              <section className="rounded-3xl border border-[#ded5c8] bg-white/70/70 p-6 shadow-2xl">
+                <h2 className="mb-4 text-xl font-medium">1. 사진 업로드</h2>
+                <div className="mb-5">
+                  <label className="mb-2 block text-sm text-neutral-400">
+                    사진이 없거나, 사진에서 잘 안 보이는 양념은 직접 입력해주세요
+                  </label>
+                  <textarea
+                    value={ingredientInput}
+                    onChange={(event) => setIngredientInput(event.target.value)}
+                    placeholder="예: 간장, 고춧가루, 참기름, 굴소스, 식초"
+                    className="min-h-24 w-full rounded-2xl border border-neutral-800 bg-white p-4 text-[#1f1a14] outline-none placeholder:text-[#9a9084] focus:border-neutral-500"
                   />
-                ) : (
-                  <div>
-                    <p className="text-lg font-medium">양념장 사진 선택</p>
-                    <p className="mt-2 text-sm text-neutral-500">
-                      양념병 이름이나 라벨이 보이도록 밝은 곳에서 촬영해주세요.<br />
-                      사진이 흐리거나 라벨이 가려져 있으면 일부 양념을 인식하지 못할 수 있습니다.
-                    </p>
-                  </div>
-                )}
+                </div>
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
-              </label>
+                <label className="flex min-h-72 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#ded5c8] bg-[#f8f4ec] p-6 text-center hover:border-[#b9aa98]">
+                  {imagePreview ? (
+                    <img
+                      src={imagePreview}
+                      alt="업로드한 양념장 사진"
+                      className="max-h-72 rounded-2xl object-contain"
+                    />
+                  ) : (
+                    <div>
+                      <p className="text-lg font-medium">양념장 사진 선택</p>
+                      <p className="mt-2 text-sm text-neutral-500">
+                        양념병 이름이나 라벨이 보이도록 밝은 곳에서 촬영해주세요.<br />
+                        사진이 흐리거나 라벨이 가려져 있으면 일부 양념을 인식하지 못할 수 있습니다.
+                      </p>
+                    </div>
+                  )}
 
-              <button
-                onClick={handleAnalyze}
-                disabled={isAnalyzing}
-                className="mt-6 w-full rounded-2xl border border-[#1f1a14] bg-neutral-100 px-5 py-4 font-semibold text-neutral-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {isAnalyzing ? "분석 중..." : "내 양념장 진단 시작하기"}
-              </button>
-              <button
-                onClick={() => setResult(null)}
-                className="mt-4 w-full rounded-xl bg-neutral-900 py-3 text-white"
-              >
-                새로 진단하기
-              </button>
-            </section>
-          </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                </label>
+
+                <button
+                  onClick={handleAnalyze}
+                  disabled={isAnalyzing}
+                  className="mt-6 w-full rounded-2xl border border-[#1f1a14] bg-neutral-100 px-5 py-4 font-semibold text-neutral-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isAnalyzing ? "분석 중..." : "내 양념장 진단 시작하기"}
+                </button>
+
+              </section>
+            </div>
+          </>
         ) : (
 
           <section className="mx-auto max-w-5xl rounded-3xl border border-[#ded5c8] bg-white/70 p-6 shadow-2xl">
             <h2 className="mb-4 text-xl font-medium">2. 진단 결과</h2>
 
             <div className="space-y-8">
-              <div className="grid gap-6 md:grid-cols-[1.4fr_0.9fr] items-center">
+              <div className="grid gap-6 grid-cols-[1.4fr_0.9fr] items-center">
 
                 <h1 className="mt-3 text-4xl font-bold leading-tight text-[#1f1a14] md:text-5xl">
                   {result.kitchenType}
@@ -369,8 +398,8 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
+              <div className="grid gap-4 grid-cols-2">
+                <div className="flex h-[160px] flex-col justify-center rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
                   <div>
                     <p className="text-sm text-[#1f1a14]">
                       보유 양념
@@ -381,7 +410,7 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="mt-3 flex items-end gap-2">
+                  <div className="mt-3 flex flex-1 items-center gap-2">
                     <span className="text-5xl font-bold text-[#1f1a14]">
                       {ingredientCount}
                     </span>
@@ -392,12 +421,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
+                <div className="flex h-[160px] flex-col justify-center rounded-2xl border border-[#ece4d8] bg-white/50 p-6">
                   <p className="text-sm text-[#7a746b]">
                     Flavor Spectrum
                   </p>
 
-                  <div className="mt-3 flex items-end gap-2">
+                  <div className="mt-3 flex flex-1 items-center gap-2">
                     <span className="text-5xl font-bold text-[#1f1a14]">
                       {flavorSpectrum}
                     </span>
@@ -410,7 +439,7 @@ export default function Home() {
               </div>
 
 
-              <div className="mt-8 grid gap-8 grid-cols-[1.2fr_0.8fr] items-start">
+              <div className="mt-8 grid gap-8 md:grid-cols-[1.2fr_0.8fr] items-start">
 
                 <FlavorRadar
                   scores={normalizedScores}
@@ -556,15 +585,16 @@ export default function Home() {
         {recommendedItems.length > 0 && (
           <section className="mt-8 rounded-3xl border border-[#ded5c8] bg-white/70 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b08a2e]">
-              LOIA 추천 보완 양념
+              추천 확장 재료
             </p>
 
             <h3 className="mt-3 text-lg font-semibold text-[#1f1a14]">
-              부족한 맛을 보완해보세요
+              당신 주방의 맛을 확장해보세요
             </h3>
 
-            <p className="mt-2 text-sm leading-6 text-[#5f574d]">
-              부족한 맛 축을 기준으로 지금 주방에 더하면 좋은 양념을 추천합니다.
+            <p className="mt-2 text-xs leading-5 text-[#7a746b]">
+              네이버 쇼핑 기준 낮은 가격순 참고입니다.
+              배송비·옵션에 따라 실제 가격은 달라질 수 있습니다.
             </p>
 
             <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -602,12 +632,7 @@ export default function Home() {
                     {shoppingResults[item.itemName]?.length > 0 && (
                       <div className="mt-4 rounded-2xl border border-[#ded5c8] bg-white/70 p-3">
                         <div className="mb-3">
-                          <p className="text-xs font-semibold text-neutral-500">
-                            네이버 낮은 가격순 참고
-                          </p>
-                          <p className="mt-1 text-xs leading-5 text-neutral-600">
-                            클릭하면 네이버 상품 페이지로 이동합니다. 가격은 배송비·옵션에 따라 달라질 수 있습니다.
-                          </p>
+
                         </div>
 
                         <div className="space-y-2">
@@ -664,7 +689,8 @@ export default function Home() {
           </section>
         )}
 
-        <div className="mt-6 grid grid-cols-3 gap-3 items-center">
+        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#ded5c8] bg-[#f4efe6]/95 backdrop-blur px-4 py-3">
+          <div className="mx-auto grid max-w-5xl grid-cols-3 gap-3 items-center">
 
             <button
               type="button"
@@ -772,38 +798,11 @@ export default function Home() {
             <button type="button"
               onClick={async () => {
                 const currentResult = result as any;
-
-                const strongAxesText =
-                  currentResult?.strongAxes?.length > 0
-                    ? currentResult.strongAxes.join(", ")
-                    : "없음";
-
-                const supportingAxesText =
-                  currentResult?.supportingAxes?.length > 0
-                    ? currentResult.supportingAxes.join(", ")
-                    : "없음";
-
-                const weakAxesText =
-                  currentResult?.weakAxes?.length > 0
-                    ? currentResult.weakAxes.join(", ")
-                    : "없음";
-
-                const kitchenType =
-                  currentResult?.kitchenType ||
-                  currentResult?.kitchen_type ||
-                  currentResult?.type ||
-                  "LOIA 진단형 주방";
-
                 const shareText = [
-                  `내 주방은 ${kitchenType}입니다.`,
-                  "",
-                  `강한 맛 축: ${strongAxesText}`,
-                  `보조 맛 축: ${supportingAxesText}`,
-                  `부족한 맛 축: ${weakAxesText}`,
-                  "",
                   "당신의 양념장은 어떤 맛 구조일까?",
+                  "",
+                  "LOIA Kitchen Diagnosis",
                 ].join("\n");
-
                 const shareData = {
                   title: "LOIA Kitchen Diagnosis",
                   text: shareText,
@@ -843,14 +842,15 @@ export default function Home() {
               LOIA Instagram
             </a>
 
+          </div>
         </div>
 
         <footer className="mt-12 border-t border-neutral-800 pt-6 text-sm text-neutral-600">
           <p className="mt-8 whitespace-pre-line text-xs leading-6 text-neutral-500">
             {`현재 LOIA Kitchen Diagnosis는 베타 테스트 버전입니다.
-사진 인식과 재료 매칭은 완벽하지 않을 수 있으며, 진단 결과는 참고용입니다.
-업로드한 사진 원본은 저장하지 않으며, 양념명 인식과 주방 진단을 위한 분석 목적으로만 사용됩니다.
-다만 서비스 개선을 위해 입력한 양념명, AI 인식 결과, 찾은 재료, 찾지 못한 재료, 진단 결과는 저장될 수 있습니다.`}
+              사진 인식과 재료 매칭은 완벽하지 않을 수 있으며, 진단 결과는 참고용입니다.
+              업로드한 사진 원본은 저장하지 않으며, 양념명 인식과 주방 진단을 위한 분석 목적으로만 사용됩니다.
+              다만 서비스 개선을 위해 입력한 양념명, AI 인식 결과, 찾은 재료, 찾지 못한 재료, 진단 결과는 저장될 수 있습니다.`}
           </p>
         </footer>
       </section>
