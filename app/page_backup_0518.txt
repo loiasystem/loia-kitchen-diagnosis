@@ -248,10 +248,7 @@ export default function Home() {
         Object.entries(result.scores).map(
           ([key, value]) => [
             key,
-            Math.max(
-              22,
-              Math.round(Math.sqrt(Number(value) / 120) * 100)
-            )
+            Math.round((Number(value) / max) * 100),
           ]
         )
       );
@@ -271,16 +268,10 @@ export default function Home() {
           0
         ) / values.length;
 
-      const coverageFactor = Math.min(
-        1,
-        ingredientCount / 12
+      const balanceScore = Math.max(
+        0,
+        10 - variance / 200
       );
-
-      const balanceScore =
-        Math.max(
-          0,
-          10 - variance / 200
-        ) * coverageFactor;
 
       return balanceScore.toFixed(1);
     })()
@@ -320,6 +311,9 @@ export default function Home() {
         {!result ? (
           <>
             <header className="mb-12">
+              <p className="mb-3 text-sm uppercase tracking-[0.35em] text-neutral-500">
+                LOIA Kitchen Diagnosis
+              </p>
 
               <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
                 우리 집 양념장은
@@ -334,7 +328,7 @@ export default function Home() {
             </header>
             <div className="mx-auto max-w-2xl">
               <section className="rounded-3xl border border-[#ded5c8] bg-white/70/70 p-6 shadow-2xl">
-                <h2 className="mb-4 text-xl font-medium">사진 업로드</h2>
+                <h2 className="mb-4 text-xl font-medium">1. 사진 업로드</h2>
                 <div className="mb-5">
                   <label className="mb-2 block text-sm text-neutral-400">
                     사진이 없거나, 사진에서 잘 안 보이는 양념은 직접 입력해주세요
@@ -386,7 +380,7 @@ export default function Home() {
         ) : (
 
           <section className="mx-auto max-w-5xl rounded-3xl border border-[#ded5c8] bg-white/70 p-6 shadow-2xl">
-            <h2 className="mb-4 text-xl font-medium">진단 결과</h2>
+            <h2 className="mb-4 text-xl font-medium">2. 진단 결과</h2>
 
             <div className="space-y-8">
               <div className="grid gap-6 grid-cols-[1.4fr_0.9fr] items-center">
@@ -457,7 +451,7 @@ export default function Home() {
 
                     <div>
                       <p className="text-sm font-semibold text-[#c06b2d] mb-3">
-                        PRIMARY (주방의 중심 맛 축)
+                        PRIMARY (핵심 축)
                       </p>
 
                       <ul className="space-y-2">
@@ -481,7 +475,7 @@ export default function Home() {
 
                     <div className="border-t border-[#ece4d8] pt-6">
                       <p className="text-sm font-semibold text-[#6f8b55] mb-3">
-                        SECONDARY (함께 형성된 보조 축)
+                        SECONDARY (보조 축)
                       </p>
 
                       <ul className="space-y-2">
@@ -511,7 +505,7 @@ export default function Home() {
 
                     <div className="border-t border-[#ece4d8] pt-6">
                       <p className="text-sm font-semibold text-[#4d73b8] mb-3">
-                        EXPANSION (더 확장될 수 있는 맛 축)
+                        EXPANSION (확장 가능 축)
                       </p>
 
                       <ul className="space-y-2">

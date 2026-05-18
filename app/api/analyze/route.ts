@@ -34,7 +34,7 @@ type Ingredient = {
     texture: number;
 };
 
-const ingredientsPath = path.join(process.cwd(), "data/ingredients.json");
+const ingredientsPath = path.join(process.cwd(), "data/ingredient_function_base.json");
 const ingredientsText = fs.readFileSync(ingredientsPath, "utf-8");
 const testIngredients: Ingredient[] = JSON.parse(ingredientsText);
 
@@ -126,6 +126,20 @@ export async function POST(request: Request) {
         texture: 0,
     };
 
+    // 각 축에 실제로 기여한 재료 개수 기록
+    const axisIngredientCounts: Record<AxisKey, number> = {
+        salty: 0,
+        umami: 0,
+        acid: 0,
+        sweet: 0,
+        bitter: 0,
+        heat: 0,
+        herb: 0,
+        spice: 0,
+        lipid: 0,
+        texture: 0,
+    };
+
     const normalizedSelectedNames = selectedNames.map((name: string) =>
         name.replace(/\s/g, "")
     );
@@ -157,6 +171,16 @@ export async function POST(request: Request) {
         total.spice += ingredient.spice;
         total.lipid += ingredient.lipid;
         total.texture += ingredient.texture;
+        if (ingredient.salty > 0) axisIngredientCounts.salty++;
+        if (ingredient.umami > 0) axisIngredientCounts.umami++;
+        if (ingredient.acid > 0) axisIngredientCounts.acid++;
+        if (ingredient.sweet > 0) axisIngredientCounts.sweet++;
+        if (ingredient.bitter > 0) axisIngredientCounts.bitter++;
+        if (ingredient.heat > 0) axisIngredientCounts.heat++;
+        if (ingredient.herb > 0) axisIngredientCounts.herb++;
+        if (ingredient.spice > 0) axisIngredientCounts.spice++;
+        if (ingredient.lipid > 0) axisIngredientCounts.lipid++;
+        if (ingredient.texture > 0) axisIngredientCounts.texture++;
     }
     const ingredientCount =
 
@@ -178,21 +202,70 @@ export async function POST(request: Request) {
         AxisKey,
         number
     ][];
-
     const nonZeroAxes = sortedAxes.filter(([, score]) => score > 0);
 
-    const strongAxes = nonZeroAxes
-        .slice(0, 2)
-        .map(([axis]) => axisLabels[axis]);
+    // 전체 축 평균값 계산
+    // 현재 주방의 전체 맛 분포 기준선으로 사용
+    const averageScore =
+        Object.values(total).reduce((a, b) => Number(a) + Number(b), 0) /
+        Object.values(total).length;
 
-    const supportingAxes = nonZeroAxes
-        .slice(2, 5)
-        .map(([axis]) => axisLabels[axis]);
+    // 축별 구조 점수 계산
+    // 단순 강도가 아니라,
+    // 실제로 얼마나 구조적으로 형성된 축인지 계산
 
-    const weakAxes = sortedAxes
-        .filter(([, score]) => score === 0)
+    const primaryScores: Record<AxisKey, number> = {} as Record<AxisKey, number>;
+
+    Object.keys(total).forEach((key) => {
+        const axis = key as AxisKey;
+
+        const axisScore = total[axis];
+        const ingredientCount = axisIngredientCounts[axis];
+
+        primaryScores[axis] =
+            axisScore * 0.6 +
+            ingredientCount * 20;
+    });
+
+    // 구조 점수(primaryScores)가 높은 축들을
+    // 현재 주방의 중심 맛 구조(PRIMARY)로 판단
+    const strongAxes = Object.entries(primaryScores)
+        .sort((a, b) => b[1] - a[1])
+        .filter(([axis]) =>
+            axisIngredientCounts[axis as AxisKey] >= 2
+        )
         .slice(0, 2)
-        .map(([axis]) => axisLabels[axis]);
+        .map(([axis]) => axisLabels[axis as AxisKey]);
+
+    // PRIMARY까지는 아니지만,
+    // 일부 재료 연결이 형성된 축들을
+    // 보조 맛 구조(SECONDARY)로 판단
+    const supportingAxes = Object.entries(primaryScores)
+        .sort((a, b) => b[1] - a[1])
+        .filter(([axis]) =>
+            axisIngredientCounts[axis as AxisKey] >= 1
+        )
+        .filter(([axis]) =>
+            !strongAxes.includes(axisLabels[axis as AxisKey])
+        )
+        .slice(0, 3)
+        .map(([axis]) => axisLabels[axis as AxisKey]);
+
+
+    // 구조 점수가 낮고,
+    // 실제 재료 연결도 거의 없는 축들을
+    // 상대적으로 비어있는 확장 구조(EXPANSION)로 판단
+    const weakAxes = Object.entries(primaryScores)
+        .sort((a, b) => a[1] - b[1])
+        .filter(([axis]) =>
+            axisIngredientCounts[axis as AxisKey] <= 1
+        )
+        .filter(([axis]) =>
+            !strongAxes.includes(axisLabels[axis as AxisKey]) &&
+            !supportingAxes.includes(axisLabels[axis as AxisKey])
+        )
+        .slice(0, 3)
+        .map(([axis]) => axisLabels[axis as AxisKey]);
 
     const recommendationMap: Record<string, string> = {
         "salty": "염도 축이 약합니다. 소금, 간장, 액젓처럼 염도를 직접 보완하는 재료를 고려해보세요.",
@@ -308,8 +381,8 @@ export async function POST(request: Request) {
     if (insertError) {
         console.error("Supabase 저장 실패:", insertError);
     }
-
+    console.log("RESULT CHECK:", result);
     return NextResponse.json(result);
 
 
-}
+} 

@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const csvPath = path.join(__dirname, "../data/ingredient_function_base.csv");
-const jsonPath = path.join(__dirname, "../data/ingredients.json");
+const jsonPath = path.join(__dirname, "../data/ingredient_function_base.json");
 const dbCsvPath = path.join(__dirname, "../data/ingredient_db.csv");
 const dbJsonPath = path.join(__dirname, "../data/ingredient_db.json");
 const aliasCsvPath = path.join(__dirname, "../data/alias_map.csv");
@@ -77,7 +77,7 @@ fs.writeFileSync(
 
 console.log(`Converted ingredient_db.csv to ingredient_db.json`);
 
-console.log(`Converted ${ingredients.length} ingredients to ingredients.json`);
+console.log(`Converted ${ingredients.length} ingredients to ingredient_function_base.json`);
 const aliasCsvText = fs.readFileSync(aliasCsvPath, "utf-8");
 
 const aliasLines = aliasCsvText
