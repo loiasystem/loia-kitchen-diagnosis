@@ -3969,6 +3969,27 @@
     "Usage_position": ""
   },
   {
+    "Code": "511.01",
+    "Name_KR": "청양고추",
+    "Name_EN": "Cheongyang Chili Pepper",
+    "Category(존재)": "Heat",
+    "Subcategory": "Fresh Chili Pepper",
+    "Main_Function(기능)": "Heat",
+    "Ambiguity": "한국 매운 생고추 계열",
+    "Note": "강한 캡사이신 자극과 생고추 특유의 풋향을 동시에 가지는 고강도 매운 향채형 고추",
+    "Description(사전식 설명)": "\"청양 지역 계통의 매우 강한 한국 고추 품종으로",
+    "CHECK_DUP": "빠른 매운 자극과 신선한 고추 향을 동시에 제공\"",
+    "Has_Rule": "CHECK",
+    "Rule_ID": "-",
+    "": "",
+    "intensity": "",
+    "Volatility": "High",
+    "Dominance": "High",
+    "Pairing": "High",
+    "Avoid_pairing": "돼지고기 / 국물요리 / 볶음요리 / 찌개",
+    "Usage_position": "크림 기반 소스 / 약한 단맛 중심 구조"
+  },
+  {
     "Code": "512",
     "Name_KR": "건고추",
     "Name_EN": "Dried Chili",

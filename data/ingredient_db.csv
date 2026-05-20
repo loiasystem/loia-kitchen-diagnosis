@@ -188,6 +188,7 @@
 500,매운맛 / 자극,Heat,Heat,Heat (매운맛 / 자극),Heat,-,상위군,혀와 입안에 물리적 자극을 주어 매운맛과 열감을 느끼게 하는 재료군,-,-,-,,,,,,,,,,,,
 510,캡사이신 자극,Capsaicin Heat,Heat,Heat (매운맛 / 자극),Heat,-,상위군,고추류의 캡사이신 성분에서 발생하는 대표적인 매운 자극 계열,-,-,-,,,,,,,,,,,,
 511,생고추,Fresh Chili,Heat,Capsaicin Heat (캡사이신 자극),Heat,-,신선형,생고추에서 오는 직접적이고 신선한 캡사이신 자극을 제공하는 재료,-,-,-,,,,,,,,,,,,
+511.01,청양고추,Cheongyang Chili Pepper,Heat,Fresh Chili Pepper,Heat,한국 매운 생고추 계열,강한 캡사이신 자극과 생고추 특유의 풋향을 동시에 가지는 고강도 매운 향채형 고추,"청양 지역 계통의 매우 강한 한국 고추 품종으로, 빠른 매운 자극과 신선한 고추 향을 동시에 제공",CHECK,-,-,,High,High,High,돼지고기 / 국물요리 / 볶음요리 / 찌개,크림 기반 소스 / 약한 단맛 중심 구조,Top,,,,,
 512,건고추,Dried Chili,Heat,Capsaicin Heat (캡사이신 자극),Heat,-,건조형,건조 과정을 거쳐 풍미와 자극이 농축된 고추 재료,-,-,-,,,,,,,,,,,,
 512.01,페퍼론치노,Peperoncino,Heat,Capsaicin Heat (캡사이신 자극),Heat+Aroma,-,건조 고추형,"이탈리아 요리에서 자주 사용되는 건조 고추 재료로, 매운 자극과 함께 건조 고추 특유의 향을 제공한다.",,,,,Primary Function,,,,,,,,,,
 513,고추 분말,Chili Powder,Heat,Capsaicin Heat (캡사이신 자극),Heat,-,분말형,건고추를 분쇄하여 만든 형태로 매운맛을 빠르게 분산시키는 재료,-,-,-,,Secondary Function 추후 기능 분리,,,,,,,,,,

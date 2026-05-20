@@ -11,7 +11,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "염도 카테고리 대표값"
   },
   {
@@ -26,7 +26,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "기본적인 염도를 형성하는 대표 조미 재료"
   },
   {
@@ -41,7 +41,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "빠르게 용해되어 전체에 균일하게 퍼지는 염도"
   },
   {
@@ -56,13 +56,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "가장 순수하고 직선적인 염도 전달"
   },
   {
     "code": "012",
     "name": "천일 가는 소금",
-    "salty": 95,
+    "salty": 85,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -71,13 +71,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "미네랄로 인해 약간의 복합 인상이 있는 염도"
   },
   {
     "code": "013",
     "name": "암염 가는 소금",
-    "salty": 95,
+    "salty": 88,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -86,14 +86,14 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "단단하고 직선적인 염도 특성"
   },
   {
     "code": "014",
     "name": "기능성 가는 소금",
-    "salty": 90,
-    "umami": 5,
+    "salty": 75,
+    "umami": 25,
     "acid": 0,
     "sweet": 0,
     "bitter": 0,
@@ -101,103 +101,28 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "첨가 성분으로 보조 기능이 부여된 염도"
   },
   {
     "code": "014.01",
     "name": "맛소금",
-    "salty": 85,
-    "umami": 20,
+    "salty": 80,
+    "umami": 35,
     "acid": 0,
     "sweet": 0,
     "bitter": 0,
     "heat": 0,
     "herb": 0,
-    "spice": 5,
+    "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "감칠 성분이 결합된 복합 염도"
   },
   {
     "code": "014.02",
     "name": "구운소금",
-    "salty": 90,
-    "umami": 0,
-    "acid": 0,
-    "sweet": 0,
-    "bitter": 5,
-    "heat": 0,
-    "herb": 0,
-    "spice": 0,
-    "lipid": 0,
-    "texture": 10,
-    "note": "열처리로 구수함과 약한 쓴맛이 동반된 염도"
-  },
-  {
-    "code": "020",
-    "name": "굵은 소금",
-    "salty": 95,
-    "umami": 0,
-    "acid": 0,
-    "sweet": 0,
-    "bitter": 0,
-    "heat": 0,
-    "herb": 0,
-    "spice": 0,
-    "lipid": 0,
-    "texture": 15,
-    "note": "입자감으로 국소적으로 강하게 전달되는 염도"
-  },
-  {
-    "code": "021",
-    "name": "정제 굵은 소금",
-    "salty": 100,
-    "umami": 0,
-    "acid": 0,
-    "sweet": 0,
-    "bitter": 0,
-    "heat": 0,
-    "herb": 0,
-    "spice": 0,
-    "lipid": 0,
-    "texture": 10,
-    "note": "순수 염도를 입자 형태로 전달"
-  },
-  {
-    "code": "022",
-    "name": "천일 굵은 소금",
-    "salty": 95,
-    "umami": 0,
-    "acid": 0,
-    "sweet": 0,
-    "bitter": 0,
-    "heat": 0,
-    "herb": 0,
-    "spice": 0,
-    "lipid": 0,
-    "texture": 15,
-    "note": "미네랄과 입자감이 함께 존재하는 염도"
-  },
-  {
-    "code": "023",
-    "name": "암염 굵은 소금",
-    "salty": 95,
-    "umami": 0,
-    "acid": 0,
-    "sweet": 0,
-    "bitter": 0,
-    "heat": 0,
-    "herb": 0,
-    "spice": 0,
-    "lipid": 0,
-    "texture": 15,
-    "note": "단단한 결정감과 잔존감이 있는 염도"
-  },
-  {
-    "code": "024",
-    "name": "특수 굵은 소금",
-    "salty": 90,
+    "salty": 85,
     "umami": 5,
     "acid": 0,
     "sweet": 0,
@@ -206,13 +131,88 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 0,
+    "note": "열처리로 구수함과 약한 쓴맛이 동반된 염도"
+  },
+  {
+    "code": "020",
+    "name": "굵은 소금",
+    "salty": 90,
+    "umami": 0,
+    "acid": 0,
+    "sweet": 0,
+    "bitter": 0,
+    "heat": 0,
+    "herb": 0,
+    "spice": 0,
+    "lipid": 0,
+    "texture": 3,
+    "note": "입자감으로 국소적으로 강하게 전달되는 염도"
+  },
+  {
+    "code": "021",
+    "name": "정제 굵은 소금",
+    "salty": 92,
+    "umami": 0,
+    "acid": 0,
+    "sweet": 0,
+    "bitter": 0,
+    "heat": 0,
+    "herb": 0,
+    "spice": 0,
+    "lipid": 0,
+    "texture": 2,
+    "note": "순수 염도를 입자 형태로 전달"
+  },
+  {
+    "code": "022",
+    "name": "천일 굵은 소금",
+    "salty": 85,
+    "umami": 0,
+    "acid": 0,
+    "sweet": 0,
+    "bitter": 0,
+    "heat": 0,
+    "herb": 0,
+    "spice": 0,
+    "lipid": 0,
+    "texture": 5,
+    "note": "미네랄과 입자감이 함께 존재하는 염도"
+  },
+  {
+    "code": "023",
+    "name": "암염 굵은 소금",
+    "salty": 88,
+    "umami": 0,
+    "acid": 0,
+    "sweet": 0,
+    "bitter": 0,
+    "heat": 0,
+    "herb": 0,
+    "spice": 0,
+    "lipid": 0,
+    "texture": 4,
+    "note": "단단한 결정감과 잔존감이 있는 염도"
+  },
+  {
+    "code": "024",
+    "name": "특수 굵은 소금",
+    "salty": 75,
+    "umami": 0,
+    "acid": 0,
+    "sweet": 0,
+    "bitter": 10,
+    "heat": 0,
+    "herb": 0,
+    "spice": 5,
+    "lipid": 0,
+    "texture": 8,
     "note": "훈연/가향 등으로 보조 기능이 추가된 염도"
   },
   {
     "code": "030",
     "name": "플레이크 소금",
-    "salty": 90,
+    "salty": 85,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -221,13 +221,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 5,
     "note": "마감용으로 사용되는 얇고 바삭한 염도"
   },
   {
     "code": "031",
     "name": "씨 솔트 플레이크",
-    "salty": 90,
+    "salty": 82,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -236,13 +236,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 5,
     "note": "바다 기반의 바삭한 마감 염도"
   },
   {
     "code": "032",
     "name": "피라미드 플레이크 소금",
-    "salty": 90,
+    "salty": 80,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -251,13 +251,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 25,
+    "texture": 8,
     "note": "형태감이 강해 시각적/물리적 마감 효과 큼"
   },
   {
     "code": "033",
     "name": "얇은 플레이크 소금",
-    "salty": 90,
+    "salty": 88,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -266,13 +266,13 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 3,
     "note": "빠르게 부서지며 퍼지는 마감 염도"
   },
   {
     "code": "034",
     "name": "미네랄 플레이크 소금",
-    "salty": 90,
+    "salty": 78,
     "umami": 0,
     "acid": 0,
     "sweet": 0,
@@ -281,7 +281,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 25,
+    "texture": 6,
     "note": "미네랄로 인해 약한 복합 인상이 있는 마감 염도"
   },
   {
@@ -296,7 +296,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "액상 형태로 균일하게 분산되는 염도"
   },
   {
@@ -311,14 +311,14 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 0,
+    "texture": 1,
     "note": "물에 용해된 기본 염도 형태"
   },
   {
     "code": "042",
     "name": "액상 소금 추출물",
-    "salty": 90,
-    "umami": 5,
+    "salty": 80,
+    "umami": 10,
     "acid": 0,
     "sweet": 0,
     "bitter": 0,
@@ -332,13 +332,13 @@
   {
     "code": "043",
     "name": "향미 액상 소금",
-    "salty": 80,
+    "salty": 75,
     "umami": 5,
     "acid": 0,
     "sweet": 0,
     "bitter": 0,
     "heat": 0,
-    "herb": 5,
+    "herb": 10,
     "spice": 5,
     "lipid": 0,
     "texture": 0,
@@ -347,14 +347,14 @@
   {
     "code": "044",
     "name": "기능성 액상 소금",
-    "salty": 85,
-    "umami": 10,
+    "salty": 70,
+    "umami": 20,
     "acid": 0,
     "sweet": 0,
     "bitter": 0,
     "heat": 0,
-    "herb": 5,
-    "spice": 5,
+    "herb": 0,
+    "spice": 0,
     "lipid": 0,
     "texture": 0,
     "note": "기능성 성분이 추가된 복합 액상 염도"
@@ -371,7 +371,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "감칠 카테고리 대표값"
   },
   {
@@ -386,7 +386,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "발효를 통해 형성되는 깊은 감칠 베이스"
   },
   {
@@ -401,7 +401,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "염도와 감칠을 함께 전달하는 대표 발효 액상 조미료"
   },
   {
@@ -416,7 +416,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "진한 색과 균형형 감칠을 가진 간장"
   },
   {
@@ -431,7 +431,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "염도 비중이 높고 국물 베이스에 적합한 간장"
   },
   {
@@ -446,7 +446,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "발효향과 감칠 균형이 좋은 양조형 간장"
   },
   {
@@ -461,7 +461,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "기타 유형의 간장군"
   },
   {
@@ -476,7 +476,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 5,
-    "texture": 45,
+    "texture": 35,
     "note": "콩 발효 기반의 깊은 감칠맛과 숙성 풍미를 가진 페이스트 계열"
   },
   {
@@ -491,7 +491,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 20,
     "note": "콩 발효 기반의 묵직한 감칠 페이스트"
   },
   {
@@ -521,7 +521,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 20,
     "note": "기타 발효 장류"
   },
   {
@@ -536,7 +536,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 감칠과 염도를 가진 액상 발효 조미료"
   },
   {
@@ -551,7 +551,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "멸치 기반의 직선적이고 강한 감칠"
   },
   {
@@ -566,7 +566,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "까나리 기반의 강한 해산 감칠"
   },
   {
@@ -581,7 +581,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 5,
-    "texture": 20,
+    "texture": 5,
     "note": "새우 발효 기반의 강한 감칠맛과 해산물 풍미를 가진 액젓"
   },
   {
@@ -596,7 +596,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 5,
-    "texture": 15,
+    "texture": 3,
     "note": "동남아 스타일의 강한 발효 어류 감칠 조미액"
   },
   {
@@ -611,7 +611,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 5,
-    "texture": 20,
+    "texture": 5,
     "note": "어류 발효 기반의 감칠 조미 액체 재료"
   },
   {
@@ -626,7 +626,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 20,
     "note": "발효장에 추가 맛축이 결합된 복합 페이스트"
   },
   {
@@ -641,7 +641,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 20,
     "note": "감칠에 단맛과 매운맛이 더해진 발효장"
   },
   {
@@ -686,7 +686,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 10,
-    "texture": 55,
+    "texture": 40,
     "note": "된장과 고추장을 기반으로 한 복합 발효 장 페이스트"
   },
   {
@@ -701,7 +701,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 10,
+    "texture": 5,
     "note": "동물성 재료에서 우러나는 묵직한 감칠 베이스"
   },
   {
@@ -716,7 +716,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "액상 기반의 동물성 감칠 베이스"
   },
   {
@@ -731,7 +731,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "가볍고 범용적인 동물성 감칠"
   },
   {
@@ -746,7 +746,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 10,
-    "texture": 5,
+    "texture": 0,
     "note": "진하고 묵직한 육향 감칠"
   },
   {
@@ -761,7 +761,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "건어물 기반의 응축된 감칠"
   },
   {
@@ -776,7 +776,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "해산물 특유의 선명한 감칠"
   },
   {
@@ -791,7 +791,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "여러 베이스가 혼합된 복합 감칠 육수"
   },
   {
@@ -806,7 +806,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 15,
-    "texture": 10,
+    "texture": 15,
     "note": "지방감과 점성이 동반된 깊은 육수"
   },
   {
@@ -821,7 +821,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 10,
-    "texture": 5,
+    "texture": 0,
     "note": "훈연향이 더해진 동물성 감칠 육수"
   },
   {
@@ -836,7 +836,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 10,
-    "texture": 40,
+    "texture": 15,
     "note": "닭 기반 감칠 성분을 농축한 조리 베이스"
   },
   {
@@ -851,7 +851,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "식물성 재료 기반의 자연스러운 감칠 베이스"
   },
   {
@@ -866,7 +866,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "해조류 기반의 맑고 선명한 감칠"
   },
   {
@@ -881,7 +881,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표적인 식물성 고감칠 베이스"
   },
   {
@@ -896,7 +896,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "기타 해조류 기반 감칠"
   },
   {
@@ -911,7 +911,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "버섯향이 동반되는 식물성 감칠"
   },
   {
@@ -926,7 +926,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "향과 감칠이 함께 살아있는 버섯 감칠"
   },
   {
@@ -941,7 +941,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "기타 버섯류 감칠"
   },
   {
@@ -956,7 +956,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "산미와 단맛을 동반한 식물성 감칠"
   },
   {
@@ -971,7 +971,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "감칠과 산미가 함께 있는 과채류 베이스"
   },
   {
@@ -986,7 +986,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "기타 채소 기반 감칠 보조군"
   },
   {
@@ -1001,7 +1001,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "채소를 우려낸 액상 베이스"
   },
   {
@@ -1016,7 +1016,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "단맛과 향을 겸하는 감칠 보조 채소"
   },
   {
@@ -1031,7 +1031,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "향과 약한 쌉쌀함이 동반되는 채소 베이스"
   },
   {
@@ -1046,7 +1046,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "단맛 중심의 식물성 베이스"
   },
   {
@@ -1061,7 +1061,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "향채 성격이 강한 감칠 보조 채소"
   },
   {
@@ -1076,7 +1076,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "농축 또는 추출로 감칠이 강화된 베이스"
   },
   {
@@ -1091,7 +1091,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "식물성 원료를 농축해 감칠을 강화한 계열"
   },
   {
@@ -1106,7 +1106,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 10,
     "note": "농축으로 감칠과 산미가 강화된 토마토"
   },
   {
@@ -1121,7 +1121,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "건조/분말화로 감칠이 농축된 버섯"
   },
   {
@@ -1136,7 +1136,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "해조류 감칠을 응축한 형태"
   },
   {
@@ -1151,7 +1151,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 식물성 추출 감칠 성분"
   },
   {
@@ -1166,7 +1166,7 @@
     "herb": 10,
     "spice": 5,
     "lipid": 0,
-    "texture": 15,
+    "texture": 5,
     "note": "채소 추출 기반의 감칠 조미액"
   },
   {
@@ -1181,7 +1181,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "동물성 원료를 농축·추출해 감칠을 강화한 계열"
   },
   {
@@ -1196,7 +1196,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "소고기 풍미가 강화된 복합 감칠 조미료"
   },
   {
@@ -1211,7 +1211,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "멸치 풍미가 강화된 복합 감칠 조미료"
   },
   {
@@ -1241,7 +1241,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 5,
+    "texture": 0,
     "note": "기타 동물성 농축·추출 감칠류"
   },
   {
@@ -1316,7 +1316,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "산미 카테고리 대표값"
   },
   {
@@ -1331,7 +1331,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표적인 산미 조절 액상 조미 재료"
   },
   {
@@ -1346,7 +1346,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "부드럽고 비교적 둥근 식초형 산미"
   },
   {
@@ -1361,7 +1361,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "과일 인상이 약하게 동반되는 식초형 산미"
   },
   {
@@ -1391,7 +1391,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "감칠과 단맛이 동반되는 농축형 식초 산미"
   },
   {
@@ -1406,7 +1406,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 10,
     "note": "\"농축된 발사믹"
   },
   {
@@ -1421,7 +1421,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"숙성 발효 식초"
   },
   {
@@ -1436,7 +1436,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 15,
+    "texture": 5,
     "note": "\"산미 중심 조미 소스"
   },
   {
@@ -1451,7 +1451,7 @@
     "herb": 0,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "\"식초+고추 기반 산미 자극 소스"
   },
   {
@@ -1466,7 +1466,7 @@
     "herb": 10,
     "spice": 10,
     "lipid": 0,
-    "texture": 35,
+    "texture": 10,
     "note": "고추와 식초 기반의 달콤하고 점도 있는 핫소스"
   },
   {
@@ -1481,7 +1481,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "식초 중심의 묽은 미국식 핫소스"
   },
   {
@@ -1496,7 +1496,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 35,
-    "texture": 40,
+    "texture": 15,
     "note": "버터와 핫소스를 혼합한 미국식 매운 소스"
   },
   {
@@ -1511,7 +1511,7 @@
     "herb": 20,
     "spice": 15,
     "lipid": 0,
-    "texture": 25,
+    "texture": 5,
     "note": "아프리카 계열 고추와 허브 풍미 기반의 매운 소스"
   },
   {
@@ -1526,7 +1526,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "밝고 상큼하며 즉각적으로 인지되는 산미"
   },
   {
@@ -1541,7 +1541,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표적인 밝고 날카로운 감귤 산미"
   },
   {
@@ -1556,7 +1556,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "더 날카롭고 초록 향 인상이 있는 감귤 산미"
   },
   {
@@ -1571,7 +1571,7 @@
     "herb": 10,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향이 강하게 동반되는 감귤 산미"
   },
   {
@@ -1586,7 +1586,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"과일 산미와 단맛이 균형 잡힌 감귤류"
   },
   {
@@ -1601,7 +1601,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"산미와 쓴맛이 함께 오는 감귤류"
   },
   {
@@ -1616,7 +1616,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 산도를 빠르게 부여하는 분리 산미 성분"
   },
   {
@@ -1631,7 +1631,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "부드럽고 둥근 산미를 중심으로 하는 발효/유제품 계열"
   },
   {
@@ -1646,7 +1646,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 30,
+    "texture": 20,
     "note": "\"유제품 발효 산미"
   },
   {
@@ -1661,7 +1661,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 15,
-    "texture": 30,
+    "texture": 25,
     "note": "발효된 유제품으로 감칠 중심 + 약한 산미"
   },
   {
@@ -1676,7 +1676,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 10,
     "note": "절임/발효 채소에서 오는 산미 + 염도"
   },
   {
@@ -1691,7 +1691,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 25,
+    "texture": 15,
     "note": "\"발효 채소 대표"
   },
   {
@@ -1706,7 +1706,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"절임 채소형 산미"
   },
   {
@@ -1721,7 +1721,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 25,
+    "texture": 10,
     "note": "유제품 기반 산미 재료군"
   },
   {
@@ -1736,7 +1736,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 10,
-    "texture": 30,
+    "texture": 20,
     "note": "\"산미가 강조된 크림"
   },
   {
@@ -1751,7 +1751,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 5,
-    "texture": 20,
+    "texture": 10,
     "note": "\"묽은 유제품 산미"
   },
   {
@@ -1766,7 +1766,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "과일성 인상과 함께 오는 입체적 산미"
   },
   {
@@ -1781,7 +1781,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "부드럽고 둥글며 지속되는 산미"
   },
   {
@@ -1796,7 +1796,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "\"산미와 단맛이 균형 잡힌 과일"
   },
   {
@@ -1811,7 +1811,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "\"단맛 중심"
   },
   {
@@ -1826,7 +1826,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "날카롭고 구조감 있는 산미"
   },
   {
@@ -1841,7 +1841,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "\"산미와 단맛"
   },
   {
@@ -1856,7 +1856,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"발효된 포도 기반 산미"
   },
   {
@@ -1871,7 +1871,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "여러 산이 결합된 입체적인 산미"
   },
   {
@@ -1886,7 +1886,7 @@
     "herb": 10,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "신맛 중심에 단맛·쓴맛·떫은맛이 결합된 복합 산미"
   },
   {
@@ -1901,7 +1901,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "과일향과 산미가 함께 오는 선명한 산미"
   },
   {
@@ -1916,7 +1916,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "짙고 복합적인 과일성 산미"
   },
   {
@@ -2006,7 +2006,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "단맛 카테고리 대표값"
   },
   {
@@ -2021,7 +2021,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "결정 또는 분말 형태의 직접적인 단맛"
   },
   {
@@ -2036,7 +2036,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 0,
     "note": "대표적인 단맛 조절 재료"
   },
   {
@@ -2066,7 +2066,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 3,
     "note": "정제도가 낮아 약한 복합감이 있는 단맛"
   },
   {
@@ -2081,7 +2081,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "빠르게 퍼지고 녹는 분말형 단맛"
   },
   {
@@ -2096,7 +2096,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "당밀 인상과 약한 쌉쌀함이 동반된 단맛"
   },
   {
@@ -2111,7 +2111,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "점성과 코팅감을 동반하는 액상 단맛"
   },
   {
@@ -2141,7 +2141,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "상대적으로 부드럽고 완만한 단맛"
   },
   {
@@ -2156,7 +2156,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 8,
     "note": "가열 인상과 약한 쓴맛이 있는 시럽형 단맛"
   },
   {
@@ -2171,7 +2171,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 8,
     "note": "과일향과 약한 산미가 동반되는 시럽형 단맛"
   },
   {
@@ -2186,7 +2186,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "단맛과 산미가 함께 작동하는 복합 시럽형 소스"
   },
   {
@@ -2201,7 +2201,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 10,
     "note": "당밀감과 점성이 강화된 흑당 계열 시럽"
   },
   {
@@ -2216,7 +2216,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "\"발효 기반 액상 단맛"
   },
   {
@@ -2231,7 +2231,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "\"단맛+알코올 기반 조미액"
   },
   {
@@ -2246,7 +2246,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 15,
+    "texture": 5,
     "note": "단맛과 발효향을 가진 일본식 조리용 술"
   },
   {
@@ -2261,7 +2261,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "조리 시 잡내 제거와 향 조절에 사용되는 곡물 발효주"
   },
   {
@@ -2276,7 +2276,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "자연 유래 원료 기반의 복합 단맛"
   },
   {
@@ -2291,7 +2291,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "향과 점성이 함께 있는 대표 천연 단맛"
   },
   {
@@ -2306,7 +2306,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 8,
     "note": "나무 향 인상이 약하게 있는 부드러운 시럽형 단맛"
   },
   {
@@ -2321,7 +2321,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 5,
     "note": "깔끔하고 비교적 중립적인 천연 시럽 단맛"
   },
   {
@@ -2336,7 +2336,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "약한 카라멜감과 쌉쌀함이 있는 천연 단맛"
   },
   {
@@ -2351,7 +2351,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 10,
     "note": "과일성 향과 농축감을 가진 천연 단맛"
   },
   {
@@ -2366,7 +2366,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "산미와 향이 함께 오는 자연 과일 단맛"
   },
   {
@@ -2381,7 +2381,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "수분감과 산미가 함께 있는 생과 단맛"
   },
   {
@@ -2396,7 +2396,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "농축된 당도와 점착감이 있는 과일 단맛"
   },
   {
@@ -2426,7 +2426,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "농축으로 당도가 높아진 과일 단맛"
   },
   {
@@ -2441,7 +2441,7 @@
     "herb": 10,
     "spice": 0,
     "lipid": 0,
-    "texture": 20,
+    "texture": 10,
     "note": "매실의 산미와 단맛을 농축한 시럽 형태 재료"
   },
   {
@@ -2456,7 +2456,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "액상으로 퍼지는 가벼운 과일 단맛"
   },
   {
@@ -2486,7 +2486,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "과일 향미와 점성을 가진 소스형 단맛"
   },
   {
@@ -2591,7 +2591,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 3,
     "note": "깔끔하지만 약간 차가운 인상의 대체 단맛"
   },
   {
@@ -2606,7 +2606,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 3,
     "note": "청량감 인상이 동반될 수 있는 당알코올 단맛"
   },
   {
@@ -2651,7 +2651,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 3,
     "note": "기능성과 감미를 함께 고려한 복합 감미 계열"
   },
   {
@@ -2666,7 +2666,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "쓴맛 카테고리 대표값"
   },
   {
@@ -2681,7 +2681,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "자연 상태에서 발생하는 기본 쓴맛"
   },
   {
@@ -2711,7 +2711,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "떫은감과 함께 오는 복합 쓴맛"
   },
   {
@@ -2726,7 +2726,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "채소에서 오는 부드럽고 자연스러운 쓴맛"
   },
   {
@@ -2741,7 +2741,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "조리/가공 과정에서 형성되는 쓴맛"
   },
   {
@@ -2756,7 +2756,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "과도한 열 처리로 발생하는 쓴맛"
   },
   {
@@ -2771,7 +2771,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 3,
     "note": "농축 과정에서 강화된 쓴맛"
   },
   {
@@ -2801,7 +2801,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "자극 카테고리 대표값"
   },
   {
@@ -2816,7 +2816,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "고추 계열의 퍼지는 열감 자극"
   },
   {
@@ -2831,8 +2831,23 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "수분과 풋향이 있는 부드러운 매운 자극"
+  },
+  {
+    "code": "511.01",
+    "name": "청양고추",
+    "salty": 0,
+    "umami": 0,
+    "acid": 5,
+    "sweet": 0,
+    "bitter": 0,
+    "heat": 95,
+    "herb": 5,
+    "spice": 5,
+    "lipid": 0,
+    "texture": 3,
+    "note": ""
   },
   {
     "code": "512",
@@ -2846,7 +2861,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "건조로 응축된 매운 자극"
   },
   {
@@ -2861,7 +2876,7 @@
     "herb": 10,
     "spice": 20,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "건조된 소형 고추 기반의 강한 매운 향신 재료"
   },
   {
@@ -2876,7 +2891,7 @@
     "herb": 10,
     "spice": 15,
     "lipid": 0,
-    "texture": 20,
+    "texture": 8,
     "note": "건조 고추를 분말화한 대표적인 매운 조미 재료"
   },
   {
@@ -2891,7 +2906,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "일반 고춧가루"
   },
   {
@@ -2906,7 +2921,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강도가 높은 캡사이신 자극"
   },
   {
@@ -2921,7 +2936,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "고강도 매운맛 중심 고춧가루"
   },
   {
@@ -2936,7 +2951,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "\"색과 향 중심"
   },
   {
@@ -2966,7 +2981,7 @@
     "herb": 0,
     "spice": 40,
     "lipid": 15,
-    "texture": 25,
+    "texture": 20,
     "note": "강한 캡사이신 자극과 감칠·단맛이 결합된 복합 매운 소스"
   },
   {
@@ -2981,7 +2996,7 @@
     "herb": 0,
     "spice": 10,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "후추 계열의 짧고 선명한 자극"
   },
   {
@@ -2996,7 +3011,7 @@
     "herb": 5,
     "spice": 65,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "피페린 기반의 자극과 향을 가진 대표 향신료"
   },
   {
@@ -3011,7 +3026,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "더 직선적이고 강한 자극"
   },
   {
@@ -3026,7 +3041,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "신선하고 부드러운 자극"
   },
   {
@@ -3041,7 +3056,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "따뜻하게 퍼지는 자극"
   },
   {
@@ -3056,7 +3071,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "신선한 향과 따뜻한 자극"
   },
   {
@@ -3071,7 +3086,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "건조로 강화된 자극"
   },
   {
@@ -3086,7 +3101,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "분말형 자극"
   },
   {
@@ -3101,7 +3116,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "질감과 수분이 있는 자극"
   },
   {
@@ -3116,7 +3131,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "이국적인 향과 자극"
   },
   {
@@ -3131,7 +3146,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "코로 치고 올라오는 휘발성 자극"
   },
   {
@@ -3146,7 +3161,7 @@
     "herb": 0,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "씨앗 상태의 자극 잠재력"
   },
   {
@@ -3161,7 +3176,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 0,
-    "texture": 15,
+    "texture": 10,
     "note": "산미와 점성이 결합된 자극"
   },
   {
@@ -3191,7 +3206,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "거칠고 지속감 있는 자극"
   },
   {
@@ -3206,7 +3221,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "얼얼하고 전기적인 자극"
   },
   {
@@ -3221,7 +3236,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "대표적인 마비 자극"
   },
   {
@@ -3236,7 +3251,7 @@
     "herb": 10,
     "spice": 10,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향이 더 강한 마비 자극"
   },
   {
@@ -3251,7 +3266,7 @@
     "herb": 0,
     "spice": 10,
     "lipid": 10,
-    "texture": 10,
+    "texture": 5,
     "note": "오일 매체로 확산되는 자극"
   },
   {
@@ -3266,7 +3281,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "분말 형태의 빠른 자극"
   },
   {
@@ -3281,7 +3296,7 @@
     "herb": 100,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "허브와 향채 카테고리 대표값"
   },
   {
@@ -3296,7 +3311,7 @@
     "herb": 95,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "부드럽고 신선한 잎 중심의 허브"
   },
   {
@@ -3311,7 +3326,7 @@
     "herb": 85,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "신선하고 그린한 마감형 허브"
   },
   {
@@ -3326,7 +3341,7 @@
     "herb": 90,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "달콤한 향과 존재감이 강한 허브"
   },
   {
@@ -3341,7 +3356,7 @@
     "herb": 95,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "개성이 강한 이국적 향 허브"
   },
   {
@@ -3356,7 +3371,7 @@
     "herb": 90,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "청량감과 상쾌함이 강한 허브"
   },
   {
@@ -3371,7 +3386,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "섬세하고 산뜻한 향 허브"
   },
   {
@@ -3386,7 +3401,7 @@
     "herb": 80,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "가벼운 파향의 잎 허브"
   },
   {
@@ -3401,7 +3416,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "아니스 계열 향 허브"
   },
   {
@@ -3416,7 +3431,7 @@
     "herb": 80,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "부드럽고 섬세한 허브"
   },
   {
@@ -3431,7 +3446,7 @@
     "herb": 75,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "오이 같은 청량 향 허브"
   },
   {
@@ -3446,7 +3461,7 @@
     "herb": 90,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "플로럴 향 중심 허브"
   },
   {
@@ -3461,7 +3476,7 @@
     "herb": 85,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "산미와 꽃향이 있는 허브"
   },
   {
@@ -3476,7 +3491,7 @@
     "herb": 90,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "달콤한 꽃향 허브"
   },
   {
@@ -3491,7 +3506,7 @@
     "herb": 85,
     "spice": 0,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "매운 향이 있는 꽃 허브"
   },
   {
@@ -3506,7 +3521,7 @@
     "herb": 95,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "강하고 구조적인 허브 향"
   },
   {
@@ -3521,7 +3536,7 @@
     "herb": 95,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "수목향과 송진감이 강한 허브"
   },
   {
@@ -3536,7 +3551,7 @@
     "herb": 95,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "대표적인 수목향 허브"
   },
   {
@@ -3551,7 +3566,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "강한 수목향 특성"
   },
   {
@@ -3566,7 +3581,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "건조하고 짭짤한 향 허브"
   },
   {
@@ -3581,7 +3596,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "범용성이 높은 허브"
   },
   {
@@ -3596,7 +3611,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "쌉싸름하고 진한 향"
   },
   {
@@ -3611,7 +3626,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "은은하게 지속되는 향"
   },
   {
@@ -3626,7 +3641,7 @@
     "herb": 90,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "따뜻하고 감싸는 향"
   },
   {
@@ -3641,7 +3656,7 @@
     "herb": 90,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "강한 존재감 허브"
   },
   {
@@ -3656,7 +3671,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "부드러운 우디 향"
   },
   {
@@ -3671,7 +3686,7 @@
     "herb": 85,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "향과 채소 기능을 함께 가짐"
   },
   {
@@ -3686,7 +3701,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "강한 향의 베이스 채소"
   },
   {
@@ -3701,7 +3716,7 @@
     "herb": 75,
     "spice": 0,
     "lipid": 0,
-    "texture": 15,
+    "texture": 8,
     "note": "단맛과 향을 동시에 제공"
   },
   {
@@ -3716,7 +3731,7 @@
     "herb": 10,
     "spice": 10,
     "lipid": 0,
-    "texture": 15,
+    "texture": 5,
     "note": "건조 양파를 분말화한 감칠·향미 보강 재료"
   },
   {
@@ -3731,7 +3746,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "자극과 향이 강한 핵심 향채"
   },
   {
@@ -3746,7 +3761,7 @@
     "herb": 15,
     "spice": 15,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "건조 마늘을 분말화한 향미 강화 재료"
   },
   {
@@ -3761,7 +3776,7 @@
     "herb": 30,
     "spice": 15,
     "lipid": 0,
-    "texture": 30,
+    "texture": 15,
     "note": "잘게 분쇄되어 즉각적인 향과 자극을 내는 마늘 형태"
   },
   {
@@ -3776,7 +3791,7 @@
     "herb": 20,
     "spice": 15,
     "lipid": 0,
-    "texture": 25,
+    "texture": 10,
     "note": "가열로 단맛과 깊은 풍미가 강화된 마늘"
   },
   {
@@ -3791,7 +3806,7 @@
     "herb": 80,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "부드럽고 단맛 있는 향채"
   },
   {
@@ -3806,7 +3821,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "파형 구조의 향채"
   },
   {
@@ -3821,7 +3836,7 @@
     "herb": 80,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 5,
     "note": "익히면 단맛 증가"
   },
   {
@@ -3836,7 +3851,7 @@
     "herb": 80,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "가벼운 향채"
   },
   {
@@ -3851,7 +3866,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "강한 향과 약한 자극"
   },
   {
@@ -3866,7 +3881,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "야생 향채"
   },
   {
@@ -3881,7 +3896,7 @@
     "herb": 80,
     "spice": 0,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "줄기 기반 향채"
   },
   {
@@ -3896,7 +3911,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "초록향 + 쌉쌀함"
   },
   {
@@ -3911,7 +3926,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "맑은 수생 향"
   },
   {
@@ -3926,7 +3941,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "채소+향 기능 혼합"
   },
   {
@@ -3941,7 +3956,7 @@
     "herb": 85,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "쌉쌀 + 매운 향"
   },
   {
@@ -3956,7 +3971,7 @@
     "herb": 80,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "수생 매운 향"
   },
   {
@@ -3971,7 +3986,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "강한 향채"
   },
   {
@@ -3986,7 +4001,7 @@
     "herb": 90,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "뿌리 기반 향 채소"
   },
   {
@@ -4001,7 +4016,7 @@
     "herb": 90,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "감귤향 줄기 향채"
   },
   {
@@ -4016,7 +4031,7 @@
     "herb": 75,
     "spice": 5,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "마늘 계열 향채"
   },
   {
@@ -4031,7 +4046,7 @@
     "herb": 80,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "생강 유사 향채"
   },
   {
@@ -4046,7 +4061,7 @@
     "herb": 85,
     "spice": 10,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "캠퍼 향 특성"
   },
   {
@@ -4061,7 +4076,7 @@
     "herb": 0,
     "spice": 100,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "건조된 향신료 카테고리 대표값"
   },
   {
@@ -4076,7 +4091,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "씨앗 기반의 따뜻하고 고소한 향"
   },
   {
@@ -4091,7 +4106,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "흙향과 따뜻한 향 중심"
   },
   {
@@ -4106,7 +4121,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표적인 따뜻한 향신료"
   },
   {
@@ -4121,7 +4136,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "단향과 쌉쌀함 동반"
   },
   {
@@ -4136,7 +4151,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "달콤하고 향긋한 씨앗 향"
   },
   {
@@ -4151,7 +4166,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "아니스 계열 단향"
   },
   {
@@ -4166,7 +4181,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "독특한 향과 쌉쌀함"
   },
   {
@@ -4181,7 +4196,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 단향 중심"
   },
   {
@@ -4196,7 +4211,7 @@
     "herb": 0,
     "spice": 80,
     "lipid": 5,
-    "texture": 5,
+    "texture": 3,
     "note": "고소함 중심"
   },
   {
@@ -4211,7 +4226,7 @@
     "herb": 0,
     "spice": 75,
     "lipid": 20,
-    "texture": 10,
+    "texture": 8,
     "note": "지방 성분이 강한 씨앗"
   },
   {
@@ -4226,7 +4241,7 @@
     "herb": 25,
     "spice": 25,
     "lipid": 65,
-    "texture": 55,
+    "texture": 35,
     "note": "고소한 지방감과 풀향을 가진 씨앗 재료"
   },
   {
@@ -4241,7 +4256,7 @@
     "herb": 10,
     "spice": 35,
     "lipid": 45,
-    "texture": 60,
+    "texture": 30,
     "note": "참깨를 볶고 분쇄한 고소한 향미 재료"
   },
   {
@@ -4256,7 +4271,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "복합 향신 특성"
   },
   {
@@ -4271,7 +4286,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 이국적 향"
   },
   {
@@ -4286,7 +4301,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "열매 기반 향신료"
   },
   {
@@ -4301,7 +4316,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "달콤한 향 중심"
   },
   {
@@ -4316,7 +4331,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표적인 단향 향신료"
   },
   {
@@ -4331,7 +4346,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "복합 향"
   },
   {
@@ -4346,7 +4361,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "색과 향 중심"
   },
   {
@@ -4361,7 +4376,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "\"색과 향"
   },
   {
@@ -4376,7 +4391,7 @@
     "herb": 10,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 이국적 향"
   },
   {
@@ -4391,7 +4406,7 @@
     "herb": 10,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "감초향 계열"
   },
   {
@@ -4406,7 +4421,7 @@
     "herb": 10,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "상쾌하고 강한 향"
   },
   {
@@ -4421,7 +4436,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "뿌리/껍질 기반 향"
   },
   {
@@ -4436,7 +4451,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "따뜻한 향"
   },
   {
@@ -4451,7 +4466,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "흙향과 색 중심"
   },
   {
@@ -4466,7 +4481,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "달콤한 껍질 향"
   },
   {
@@ -4481,7 +4496,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "대표 단향 향신료"
   },
   {
@@ -4496,7 +4511,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 계피 향"
   },
   {
@@ -4511,7 +4526,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "씨핵 중심 향"
   },
   {
@@ -4526,7 +4541,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "따뜻한 향"
   },
   {
@@ -4541,7 +4556,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "부드러운 향"
   },
   {
@@ -4556,7 +4571,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "깊고 무거운 향"
   },
   {
@@ -4571,7 +4586,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "루트비어 계열 향"
   },
   {
@@ -4586,7 +4601,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "단향 중심"
   },
   {
@@ -4601,7 +4616,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "약재 향"
   },
   {
@@ -4616,7 +4631,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "복합 뿌리 향"
   },
   {
@@ -4631,7 +4646,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "꽃 기반 강한 향"
   },
   {
@@ -4646,7 +4661,7 @@
     "herb": 0,
     "spice": 100,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "강한 향"
   },
   {
@@ -4661,7 +4676,7 @@
     "herb": 0,
     "spice": 100,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "가장 강한 향신료 중 하나"
   },
   {
@@ -4676,7 +4691,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "섬세한 향"
   },
   {
@@ -4691,7 +4706,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향과 색 동시 제공"
   },
   {
@@ -4706,7 +4721,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "고유 향 특성"
   },
   {
@@ -4721,7 +4736,7 @@
     "herb": 0,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "바닐라+아몬드 향"
   },
   {
@@ -4736,7 +4751,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "여러 향신료 조합"
   },
   {
@@ -4751,7 +4766,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "범용 혼합"
   },
   {
@@ -4766,7 +4781,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "복합 향과 자극"
   },
   {
@@ -4781,7 +4796,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "따뜻한 향 중심"
   },
   {
@@ -4796,7 +4811,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "자극 중심 혼합"
   },
   {
@@ -4811,7 +4826,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "지역 특화 혼합"
   },
   {
@@ -4826,7 +4841,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "허브+산미 혼합"
   },
   {
@@ -4841,7 +4856,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 5,
-    "texture": 10,
+    "texture": 5,
     "note": "견과 포함 혼합"
   },
   {
@@ -4856,7 +4871,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "특정 요리용"
   },
   {
@@ -4871,7 +4886,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "훈연+단맛"
   },
   {
@@ -4886,7 +4901,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "자극 중심"
   },
   {
@@ -4901,7 +4916,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 10,
+    "texture": 3,
     "note": "향신 강도 높음"
   },
   {
@@ -4916,7 +4931,7 @@
     "herb": 5,
     "spice": 95,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향 성분을 추출한 형태"
   },
   {
@@ -4931,7 +4946,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "물 기반 추출"
   },
   {
@@ -4946,7 +4961,7 @@
     "herb": 5,
     "spice": 85,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향이 녹아든 액체"
   },
   {
@@ -4961,7 +4976,7 @@
     "herb": 5,
     "spice": 80,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "향 중심 음용 추출"
   },
   {
@@ -4976,7 +4991,7 @@
     "herb": 5,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "알코올 기반 향 추출"
   },
   {
@@ -4991,7 +5006,7 @@
     "herb": 0,
     "spice": 90,
     "lipid": 0,
-    "texture": 5,
+    "texture": 0,
     "note": "고농도 향 추출"
   },
   {
@@ -5006,7 +5021,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 100,
-    "texture": 10,
+    "texture": 5,
     "note": "풍미를 전달하고 코팅하는 매체"
   },
   {
@@ -5021,7 +5036,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 20,
+    "texture": 10,
     "note": "동물성 풍미가 강한 지방"
   },
   {
@@ -5036,7 +5051,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 15,
     "note": "고소하고 무거운 풍미"
   },
   {
@@ -5051,7 +5066,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "소고기 풍미가 강한 지방"
   },
   {
@@ -5066,7 +5081,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 20,
+    "texture": 10,
     "note": "부드러운 감칠 풍미"
   },
   {
@@ -5081,7 +5096,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 15,
     "note": "진하고 고급스러운 풍미"
   },
   {
@@ -5096,7 +5111,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 15,
+    "texture": 8,
     "note": "해산물 감칠 풍미"
   },
   {
@@ -5111,7 +5126,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 95,
-    "texture": 25,
+    "texture": 15,
     "note": "훈연+감칠 복합 풍미"
   },
   {
@@ -5126,7 +5141,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 20,
+    "texture": 10,
     "note": "닭기름 기반 유대식 지방"
   },
   {
@@ -5141,7 +5156,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "식물성 기반 지방"
   },
   {
@@ -5156,7 +5171,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "맛 영향이 적은 기본 오일"
   },
   {
@@ -5171,7 +5186,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 35,
+    "texture": 10,
     "note": "조리 시 열 전달과 지방감을 형성하는 기본 오일"
   },
   {
@@ -5186,7 +5201,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "가장 중립적인 오일"
   },
   {
@@ -5201,7 +5216,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "범용 식용유"
   },
   {
@@ -5216,7 +5231,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "가벼운 식물성 오일"
   },
   {
@@ -5231,7 +5246,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 20,
+    "texture": 10,
     "note": "고체감 있는 식물성 지방"
   },
   {
@@ -5246,7 +5261,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "\"맛 영향이 거의 없는 중성 오일"
   },
   {
@@ -5261,7 +5276,7 @@
     "herb": 10,
     "spice": 10,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "향을 담아 전달하는 오일"
   },
   {
@@ -5276,7 +5291,7 @@
     "herb": 10,
     "spice": 5,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "과일향과 쌉쌀함"
   },
   {
@@ -5291,7 +5306,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "고소한 향 중심"
   },
   {
@@ -5306,7 +5321,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "강한 고소함"
   },
   {
@@ -5321,7 +5336,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "견과 향"
   },
   {
@@ -5336,7 +5351,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "진한 견과 향"
   },
   {
@@ -5351,7 +5366,7 @@
     "herb": 5,
     "spice": 5,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "부드러운 단향"
   },
   {
@@ -5366,7 +5381,7 @@
     "herb": 10,
     "spice": 20,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "강한 향 주입 오일"
   },
   {
@@ -5381,7 +5396,7 @@
     "herb": 5,
     "spice": 10,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "마늘 향 전달"
   },
   {
@@ -5396,7 +5411,7 @@
     "herb": 5,
     "spice": 15,
     "lipid": 95,
-    "texture": 20,
+    "texture": 8,
     "note": "자극 전달 오일"
   },
   {
@@ -5411,7 +5426,7 @@
     "herb": 20,
     "spice": 10,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "허브 향 전달"
   },
   {
@@ -5426,7 +5441,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 20,
+    "texture": 8,
     "note": "기능적 특성 중심 오일"
   },
   {
@@ -5441,7 +5456,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 15,
     "note": "고체감과 단향"
   },
   {
@@ -5456,7 +5471,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 10,
+    "texture": 3,
     "note": "고온 조리용"
   },
   {
@@ -5471,7 +5486,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 15,
+    "texture": 5,
     "note": "고온 안정성"
   },
   {
@@ -5486,7 +5501,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 20,
     "note": "유제품 기반 지방"
   },
   {
@@ -5501,7 +5516,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 20,
     "note": "버터 계열"
   },
   {
@@ -5516,7 +5531,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 25,
     "note": "감칠과 단향 동시"
   },
   {
@@ -5531,7 +5546,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 25,
+    "texture": 20,
     "note": "불순물 제거 지방"
   },
   {
@@ -5546,7 +5561,7 @@
     "herb": 0,
     "spice": 5,
     "lipid": 95,
-    "texture": 30,
+    "texture": 25,
     "note": "고온 안정 + 깊은 풍미"
   },
   {
@@ -5561,7 +5576,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 30,
+    "texture": 25,
     "note": "유화된 지방"
   },
   {
@@ -5576,7 +5591,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 30,
+    "texture": 25,
     "note": "부드러운 유화 지방"
   },
   {
@@ -5591,7 +5606,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 30,
+    "texture": 25,
     "note": "산미 포함 지방"
   },
   {
@@ -5651,7 +5666,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 30,
+    "texture": 25,
     "note": "단맛 중심 지방"
   },
   {
@@ -5666,7 +5681,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "기능성 가공 지방"
   },
   {
@@ -5681,7 +5696,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 35,
+    "texture": 25,
     "note": "구조 형성용 지방"
   },
   {
@@ -5696,7 +5711,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 40,
+    "texture": 30,
     "note": "높은 구조 안정성"
   },
   {
@@ -5711,7 +5726,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 35,
+    "texture": 25,
     "note": "버터 대체 지방"
   },
   {
@@ -5726,7 +5741,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "복합 블렌드 지방"
   },
   {
@@ -5741,7 +5756,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "다목적 지방"
   },
   {
@@ -5756,7 +5771,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "동물성 혼합"
   },
   {
@@ -5771,7 +5786,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "안정성 중심 지방"
   },
   {
@@ -5786,7 +5801,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "불순물 제거"
   },
   {
@@ -5801,7 +5816,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 95,
-    "texture": 30,
+    "texture": 20,
     "note": "산화 방지 목적"
   },
   {
@@ -5816,7 +5831,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 85,
-    "texture": 40,
+    "texture": 35,
     "note": "지방과 수분이 결합된 구조"
   },
   {
@@ -5831,7 +5846,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 85,
-    "texture": 45,
+    "texture": 40,
     "note": "균일하게 유지되는 유화"
   },
   {
@@ -5846,7 +5861,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 90,
-    "texture": 50,
+    "texture": 45,
     "note": "안정 유화 대표"
   },
   {
@@ -5861,7 +5876,7 @@
     "herb": 5,
     "spice": 0,
     "lipid": 90,
-    "texture": 50,
+    "texture": 45,
     "note": "마늘 향 유화"
   },
   {
@@ -5876,7 +5891,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 80,
-    "texture": 30,
+    "texture": 20,
     "note": "분리되는 유화"
   },
   {
@@ -5891,7 +5906,7 @@
     "herb": 0,
     "spice": 0,
     "lipid": 80,
-    "texture": 25,
+    "texture": 15,
     "note": "산미 중심 유화"
   },
   {
