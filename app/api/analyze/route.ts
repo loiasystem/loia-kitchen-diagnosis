@@ -38,6 +38,18 @@ const ingredientsPath = path.join(process.cwd(), "data/ingredient_function_base.
 const ingredientsText = fs.readFileSync(ingredientsPath, "utf-8");
 const testIngredients: Ingredient[] = JSON.parse(ingredientsText);
 
+// ingredient_db metadata 불러오기
+const ingredientDbPath = path.join(
+    process.cwd(),
+    "data/ingredient_db.json"
+);
+const ingredientDbText = fs.readFileSync(
+    ingredientDbPath,
+    "utf-8"
+);
+const ingredientMetadata = JSON.parse(ingredientDbText);
+
+
 const aliasMapPath = path.join(process.cwd(), "data/alias_map.json");
 const aliasMapText = fs.readFileSync(aliasMapPath, "utf-8");
 const aliasMap = JSON.parse(aliasMapText);
@@ -156,6 +168,23 @@ export async function POST(request: Request) {
 
     const foundNames = selectedIngredients.map((ingredient) => ingredient.name);
 
+    // 선택된 재료들의 metadata 연결
+    const selectedIngredientMetadata = ingredientMetadata.filter(
+        (item: any) => {
+            const metadataName = item.Name_KR?.replace(/\s/g, "");
+            return selectedIngredients.some((ingredient) =>
+                ingredient.name.replace(/\s/g, "") === metadataName
+            );
+        }
+    );
+
+    // 선택된 재료 metadata 확인
+    console.log(
+        "selectedIngredientMetadata:",
+        selectedIngredientMetadata
+    );
+
+
     const missingNames = selectedNames.filter(
         (name: string) => !foundNames.includes(name)
     );
@@ -232,7 +261,7 @@ export async function POST(request: Request) {
     const strongAxes = Object.entries(primaryScores)
         .sort((a, b) => b[1] - a[1])
         .filter(([axis]) =>
-            axisIngredientCounts[axis as AxisKey] >= 2
+            axisIngredientCounts[axis as AxisKey] >= 1
         )
         .slice(0, 2)
         .map(([axis]) => axisLabels[axis as AxisKey]);
@@ -243,7 +272,7 @@ export async function POST(request: Request) {
     const supportingAxes = Object.entries(primaryScores)
         .sort((a, b) => b[1] - a[1])
         .filter(([axis]) =>
-            axisIngredientCounts[axis as AxisKey] >= 1
+            axisIngredientCounts[axis as AxisKey] >= 2
         )
         .filter(([axis]) =>
             !strongAxes.includes(axisLabels[axis as AxisKey])
@@ -267,6 +296,80 @@ export async function POST(request: Request) {
         .slice(0, 3)
         .map(([axis]) => axisLabels[axis as AxisKey]);
 
+    // LOIA Flavor 해석용 중간 데이터
+    // 이후 AI Flavor Profile 생성에 사용됨
+    const flavorSummary = {
+        // 현재 주방의 핵심 축
+        dominantAxes: strongAxes,
+
+        // 보조 풍미 축
+        supportingAxes,
+
+        // 부족하거나 비어있는 축
+        weakAxes,
+
+        // 풍미 스타일 태그
+        // 예: "발효 기반", "강한 자극", "깊은 풍미"
+        styleTags: [] as string[],
+
+        // 잘 어울리는 요리 방향
+        // 예: "찌개", "볶음", "양념장"
+        compatibleCuisine: [] as string[],
+    };
+
+    // metadata 기반 flavor tag 추출
+    selectedIngredientMetadata.forEach((item: any) => {
+        const subcategory =
+            item.Subcategory?.toLowerCase() || "";
+        const description =
+            item["Description(사전식 설명)"]?.toLowerCase() || "";
+
+        // 발효 계열 감지
+        if (
+            subcategory.includes("fermented") ||
+            description.includes("발효")
+        ) {
+            // 해산물 기반 감칠 구조 감지
+            if (
+                subcategory.includes("seafood") ||
+                description.includes("해산물") ||
+                description.includes("액젓")
+            ) {
+                if (
+                    !flavorSummary.styleTags.includes("해산물 감칠")
+                ) {
+                    flavorSummary.styleTags.push("해산물 감칠");
+                }
+            }
+            if (
+                !flavorSummary.styleTags.includes("발효 기반")
+            ) {
+                flavorSummary.styleTags.push("발효 기반");
+            }
+        }
+    });
+
+    // Heat + Umami 구조 해석
+    if (
+        (
+            strongAxes.some((axis) => axis.includes("매운맛")) ||
+            supportingAxes.some((axis) => axis.includes("매운맛"))
+        ) &&
+        strongAxes.some((axis) => axis.includes("감칠맛"))
+    ) {
+        flavorSummary.styleTags.push(
+            "강한 자극",
+            "깊은 풍미",
+            "발효 기반"
+        );
+
+        flavorSummary.compatibleCuisine.push(
+            "볶음",
+            "찌개",
+            "양념장"
+        );
+    }
+
     const recommendationMap: Record<string, string> = {
         "salty": "염도 축이 약합니다. 소금, 간장, 액젓처럼 염도를 직접 보완하는 재료를 고려해보세요.",
         "umami": "감칠맛 축이 약합니다. 간장, 된장, 다시다, 버섯, 다시마 계열을 보완하면 맛의 바닥이 안정됩니다.",
@@ -279,6 +382,8 @@ export async function POST(request: Request) {
         "lipid": "지방감 축이 약합니다. 참기름, 들기름, 올리브유, 버터 같은 지방 재료를 보완하면 풍미 전달력이 좋아집니다.",
         "texture": "질감 축이 약합니다. 깨, 빵가루, 튀김가루, 전분처럼 식감을 만드는 재료를 추가하면 음식의 완성감이 올라갑니다.",
     };
+
+
 
     const recommendation = weakAxes.map((axisKey) => {
         const normalizedKey = axisKey.toLowerCase();
@@ -319,6 +424,114 @@ export async function POST(request: Request) {
     });
     console.log("recommendation:", recommendation);
 
+    // Flavor Narrative 생성
+    const flavorPrompt = `
+너는 사용자의 양념 구조를 해석하는 flavor analyst다.
+
+다음 데이터를 기반으로
+사람이 읽었을 때 흥미롭고,
+약간은 삶의 취향까지 읽히는 듯한
+LOIA 스타일 해설을 작성해라.
+
+[조건]
+- 너무 오글거리면 안됨
+- 분석 리포트처럼 담백하게
+- 하지만 사람을 읽는 느낌은 있어야 함
+- 4~6문장
+- "~일 가능성이 있습니다"
+- "~경향이 있습니다"
+같은 표현 활용 가능
+
+- 단순 맛 분석에서 끝내지 말 것
+- 이 flavor 구조를 자주 사용할 것 같은 사람의 요리 습관까지 추론할 것
+- "아마도 ~를 자주 드셨을 가능성이 있습니다"
+- "~한 요리에 자연스럽게 손이 갔을 구조입니다"
+같은 표현 사용 가능
+- 사용자의 삶을 은근히 읽는 느낌 허용
+- 하지만 MBTI 놀이처럼 과장하지 말 것
+- 음식 설명보다 사람 취향 해석이 더 중요함
+- 문장은 짧고 단단하게
+- 한 문장마다 관찰 하나씩
+- "이런 요리를 자주 해왔을 가능성이 있습니다"
+같은 생활 추론 허용
+- 사용자의 요리 습관을 읽는 느낌 허용
+- 너무 친절한 설명문 금지
+- 브랜드 카피처럼 리듬감 있게
+
+- 첫 문장은 flavor 구조 해석
+- 두 번째 문장은 실제 요리 호환성
+- 마지막 문장은 사용자 취향/생활 추론
+
+[조건]
+
+- 너무 오글거리면 안됨
+- 분석 리포트처럼 담백하게
+- 하지만 사람을 읽는 느낌은 있어야 함
+
+subtitle:
+- 한 줄 요약
+- 현재 flavor 구조의 핵심 인상
+- 짧고 압축적
+
+profile:
+- 현재 사용자의 맛 구조 분석
+- 어떤 음식 스타일과 연결되는지
+- 어떤 조리 습관과 연결되는지 추론 가능
+- 현재 flavor 구조 자체를 해석하는 영역
+
+expansion:
+- 부족한 축이 추가되면 어떤 변화가 생기는지
+- 새로운 맛 방향 제안
+- 현재 구조 설명 반복 금지
+- 변화와 확장 중심으로 작성
+
+
+[현재 flavor 구조]
+dominant axes:
+${flavorSummary.dominantAxes.join(", ")}
+
+supporting axes:
+${flavorSummary.supportingAxes.join(", ")}
+
+weak axes:
+${flavorSummary.weakAxes.join(", ")}
+
+style tags:
+${flavorSummary.styleTags.join(", ")}
+
+compatible cuisine:
+${flavorSummary.compatibleCuisine.join(", ")}
+
+사용 재료:
+${foundNames.join(", ")}
+
+반드시 JSON 형태로만 응답해라.
+
+{
+  "subtitle": "...",
+  "profile": "...",
+  "expansion": "..."
+}
+`;
+
+    const narrativeResponse = await openai.responses.create({
+        model: "gpt-4.1-mini",
+        input: flavorPrompt,
+    });
+
+    const parsed = JSON.parse(
+        narrativeResponse.output_text || "{}"
+    );
+
+    const flavorSubtitle =
+        parsed.subtitle || "";
+
+    const flavorNarrative =
+        parsed.profile || "";
+
+    const flavorExpansionNarrative =
+        parsed.expansion || "";
+
     const mainAxis = strongAxes[0] || "";
 
     const kitchenType = mainAxis.includes("Salty")
@@ -349,6 +562,11 @@ export async function POST(request: Request) {
         weakAxes,
         scores: total,
         recommendation,
+        flavorSummary,
+        flavorNarrative,
+        flavorExpansionNarrative,
+        flavorSubtitle,
+
         summary:
             selectedIngredients.length > 0
                 ? `찾은 재료: ${foundNames.join(", ")}
