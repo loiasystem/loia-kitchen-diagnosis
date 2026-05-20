@@ -285,16 +285,13 @@ export async function POST(request: Request) {
     // 실제 재료 연결도 거의 없는 축들을
     // 상대적으로 비어있는 확장 구조(EXPANSION)로 판단
     const weakAxes = Object.entries(primaryScores)
-        .sort((a, b) => a[1] - b[1])
-        .filter(([axis]) =>
-            axisIngredientCounts[axis as AxisKey] <= 1
-        )
-        .filter(([axis]) =>
-            !strongAxes.includes(axisLabels[axis as AxisKey]) &&
-            !supportingAxes.includes(axisLabels[axis as AxisKey])
-        )
-        .slice(0, 3)
-        .map(([axis]) => axisLabels[axis as AxisKey]);
+    .sort((a, b) => a[1] - b[1])
+    .filter(([axis]) =>
+        !strongAxes.includes(axisLabels[axis as AxisKey]) &&
+        !supportingAxes.includes(axisLabels[axis as AxisKey])
+    )
+    .slice(0, 3)
+    .map(([axis]) => axisLabels[axis as AxisKey]);
 
     // LOIA Flavor 해석용 중간 데이터
     // 이후 AI Flavor Profile 생성에 사용됨

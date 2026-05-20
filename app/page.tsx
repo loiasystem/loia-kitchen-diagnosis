@@ -563,278 +563,485 @@ export default function Home() {
         )}
 
 
-      {recommendedItems.length > 0 && (
-        <section className="mt-8 rounded-3xl border border-[#ded5c8] bg-white/70 p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b08a2e]">
-            추천 확장 재료
-          </p>
+        {recommendedItems.length > 0 && (
+          <section className="mt-8 rounded-3xl border border-[#ded5c8] bg-white/70 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b08a2e]">
+              추천 확장 재료
+            </p>
 
-          <h3 className="mt-3 text-lg font-semibold text-[#1f1a14]">
-            당신 주방의 맛을 확장해보세요
-          </h3>
+            <h3 className="mt-3 text-lg font-semibold text-[#1f1a14]">
+              당신 주방의 맛을 확장해보세요
+            </h3>
 
-          <p className="mt-2 text-xs leading-5 text-[#7a746b]">
-            네이버 쇼핑 기준 낮은 가격순 참고입니다.
-            배송비·옵션에 따라 실제 가격은 달라질 수 있습니다.
-          </p>
+            <p className="mt-2 text-xs leading-5 text-[#7a746b]">
+              네이버 쇼핑 기준 낮은 가격순 참고입니다.
+              배송비·옵션에 따라 실제 가격은 달라질 수 있습니다.
+            </p>
 
-          <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {recommendedItems.slice(0, 6).map((item) => {
-              const naverUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(
-                item.naverKeyword
-              )}`;
+            <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {recommendedItems.slice(0, 6).map((item) => {
+                const naverUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(
+                  item.naverKeyword
+                )}`;
 
-              const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(
-                item.coupangKeyword
-              )}`;
+                const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(
+                  item.coupangKeyword
+                )}`;
 
-              return (
-                <div
-                  key={`${item.axisCode}-${item.itemName}`}
-                  className="rounded-2xl border border-[#ded5c8] bg-[#f8f4ec] p-4"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-semibold text-[#1f1a14]">
-                        {item.itemName}
-                      </p>
-                      <p className="mt-1 text-xs text-[#5f574d]">
-                        {item.axisCode} {item.axisName} 보완
-                      </p>
-                    </div>
-                    <span className="rounded-full border border-yellow-700/40 bg-yellow-950/10 px-2 py-1 text-xs text-[#b08a2e]">
-                      대표 보완
-                    </span>
-                  </div>
-
-                  <p className="mt-3 text-sm leading-6 text-neutral-400">
-                    {item.note}
-                  </p>
-                  {shoppingResults[item.itemName]?.length > 0 && (
-                    <div className="mt-4 rounded-2xl border border-[#ded5c8] bg-white/70 p-3">
-                      <div className="mb-3">
-
+                return (
+                  <div
+                    key={`${item.axisCode}-${item.itemName}`}
+                    className="rounded-2xl border border-[#ded5c8] bg-[#f8f4ec] p-4"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-[#1f1a14]">
+                          {item.itemName}
+                        </p>
+                        <p className="mt-1 text-xs text-[#5f574d]">
+                          {item.axisCode} {item.axisName} 보완
+                        </p>
                       </div>
-
-                      <div className="space-y-2">
-                        {shoppingResults[item.itemName].slice(0, 3).map((product) => (
-                          <a
-                            key={product.productId}
-                            href={product.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block rounded-xl border border-[#ded5c8] bg-[#f8f4ec] p-3 hover:bg-white"
-                          >
-                            <p className="line-clamp-2 text-xs leading-5 text-[#1f1a14]">
-                              {product.title}
-                            </p>
-
-                            <div className="mt-2 flex items-center justify-between gap-3">
-                              <span className="text-xs text-[#5f574d]">
-                                {product.mallName}
-                              </span>
-
-                              <span className="text-sm font-semibold text-[#1f1a14]">
-                                {Number(product.lprice).toLocaleString()}원
-                              </span>
-                            </div>
-                          </a>
-                        ))}
-                      </div>
+                      <span className="rounded-full border border-yellow-700/40 bg-yellow-950/10 px-2 py-1 text-xs text-[#b08a2e]">
+                        대표 보완
+                      </span>
                     </div>
-                  )}
 
-                  <div className="mt-4 grid grid-cols-2 gap-2">
-                    <a
-                      href={naverUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full border border-neutral-700 px-3 py-2 text-center text-xs font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
-                    >
-                      네이버 쇼핑
-                    </a>
+                    <p className="mt-3 text-sm leading-6 text-neutral-400">
+                      {item.note}
+                    </p>
+                    {shoppingResults[item.itemName]?.length > 0 && (
+                      <div className="mt-4 rounded-2xl border border-[#ded5c8] bg-white/70 p-3">
+                        <div className="mb-3">
 
-                    <a
-                      href={coupangUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full border border-neutral-700 px-3 py-2 text-center text-xs font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
-                    >
-                      쿠팡 검색
-                    </a>
+                        </div>
+
+                        <div className="space-y-2">
+                          {shoppingResults[item.itemName].slice(0, 3).map((product) => (
+                            <a
+                              key={product.productId}
+                              href={product.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block rounded-xl border border-[#ded5c8] bg-[#f8f4ec] p-3 hover:bg-white"
+                            >
+                              <p className="line-clamp-2 text-xs leading-5 text-[#1f1a14]">
+                                {product.title}
+                              </p>
+
+                              <div className="mt-2 flex items-center justify-between gap-3">
+                                <span className="text-xs text-[#5f574d]">
+                                  {product.mallName}
+                                </span>
+
+                                <span className="text-sm font-semibold text-[#1f1a14]">
+                                  {Number(product.lprice).toLocaleString()}원
+                                </span>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="mt-4 grid grid-cols-2 gap-2">
+                      <a
+                        href={naverUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full border border-neutral-700 px-3 py-2 text-center text-xs font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
+                      >
+                        네이버 쇼핑
+                      </a>
+
+                      <a
+                        href={coupangUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full border border-neutral-700 px-3 py-2 text-center text-xs font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
+                      >
+                        쿠팡 검색
+                      </a>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+                );
+              })}
+            </div>
+          </section>
+        )}
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#ded5c8] bg-[#f4efe6]/95 backdrop-blur px-4 py-3">
-        <div className="mx-auto grid max-w-5xl grid-cols-3 gap-3 items-center">
+        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#ded5c8] bg-[#f4efe6]/95 backdrop-blur px-4 py-3">
+          <div className="mx-auto grid max-w-5xl grid-cols-3 gap-3 items-center">
 
-          <button
-            type="button"
-            onClick={() => {
-              const currentResult = result as any;
+            <button
+              type="button"
+              onClick={() => {
+                const currentResult = result as any;
 
-              const strongAxesText =
-                currentResult?.strongAxes?.length > 0
-                  ? currentResult.strongAxes.join(", ")
-                  : "없음";
+                const strongAxesText =
+                  currentResult?.strongAxes?.length > 0
+                    ? currentResult.strongAxes.join(", ")
+                    : "없음";
 
-              const supportingAxesText =
-                currentResult?.supportingAxes?.length > 0
-                  ? currentResult.supportingAxes.join(", ")
-                  : "없음";
+                const supportingAxesText =
+                  currentResult?.supportingAxes?.length > 0
+                    ? currentResult.supportingAxes.join(", ")
+                    : "없음";
 
-              const weakAxesText =
-                currentResult?.weakAxes?.length > 0
-                  ? currentResult.weakAxes.join(", ")
-                  : "없음";
+                const weakAxesText =
+                  currentResult?.weakAxes?.length > 0
+                    ? currentResult.weakAxes.join(", ")
+                    : "없음";
 
-              const kitchenType =
-                currentResult?.kitchenType ||
-                currentResult?.kitchen_type ||
-                currentResult?.type ||
-                "LOIA 진단형 주방";
+                const kitchenType =
+                  currentResult?.kitchenType ||
+                  currentResult?.kitchen_type ||
+                  currentResult?.type ||
+                  "LOIA 진단형 주방";
 
-              const canvas = document.createElement("canvas");
-              const ctx = canvas.getContext("2d");
 
-              if (!ctx) {
-                alert("스토리 이미지를 만들 수 없습니다.");
-                return;
-              }
+                //스토리 이미지 생성 엔진  
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
 
-              canvas.width = 1080;
-              canvas.height = 1920;
+                if (!ctx) {
+                  alert("스토리 이미지를 만들 수 없습니다.");
+                  return;
+                }
 
-              ctx.fillStyle = "#050505";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
+                canvas.width = 1080;
+                canvas.height = 1920;
 
-              ctx.fillStyle = "#737373";
-              ctx.font = "28px sans-serif";
-              ctx.fillText("LOIA KITCHEN DIAGNOSIS", 80, 140);
+                const W = 1080;
+                const H = 1920;
 
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "bold 68px sans-serif";
-              ctx.fillText("내 주방은", 80, 300);
-              ctx.fillText(kitchenType, 80, 390);
-              ctx.fillText("입니다.", 80, 480);
+                // 배경
+                const bgGrad = ctx.createLinearGradient(0, 0, W, H);
 
-              ctx.strokeStyle = "#404040";
-              ctx.lineWidth = 2;
-              ctx.strokeRect(80, 600, 920, 680);
+                bgGrad.addColorStop(0, "#18110c");
+                bgGrad.addColorStop(0.5, "#1e1510");
+                bgGrad.addColorStop(1, "#0f0a06");
 
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("강한 맛 축", 120, 700);
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, W, H);
 
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(strongAxesText, 120, 770);
+                // 상단 브랜드
+                ctx.fillStyle = "rgba(200,140,70,0.6)";
+                ctx.font = "24px sans-serif";
+                ctx.fillText("LOIA", 80, 90);
+                ctx.font = "18px sans-serif";
+                ctx.fillText("KITCHEN DIAGNOSIS", 80, 130);
 
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("보조 맛 축", 120, 900);
+                // 메인 타이틀
+                ctx.fillStyle = "#f0e0c8";
+                ctx.font = "bold 88px sans-serif";
+                ctx.fillText("내 주방은", 80, 310);
+                ctx.fillText(
+                  currentResult.kitchenType || "LOIA 진단형 주방",
+                  80,
+                  430
+                );
 
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(supportingAxesText, 120, 970);
+                // 서브 문구
+                ctx.fillStyle = "rgba(220,170,110,0.7)";
+                ctx.font = "34px sans-serif";
 
-              ctx.fillStyle = "#a3a3a3";
-              ctx.font = "32px sans-serif";
-              ctx.fillText("부족한 맛 축", 120, 1080);
+                ctx.fillText(
+                  currentResult.flavorSubtitle || "당신의 맛 구조를 분석했어요.",
+                  80,
+                  510
+                );
 
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "34px sans-serif";
-              ctx.fillText(weakAxesText, 120, 1150);
+                // flavor bars
+                const axes = [
+                  {
+                    code: "000",
+                    label: "SALTY",
+                    korean: "짠맛",
+                    value: currentResult?.scores?.salty || 0,
+                    color: "#d6c6a5",
+                  },
+                  {
+                    code: "100",
+                    label: "UMAMI",
+                    korean: "감칠맛",
+                    value: currentResult?.scores?.umami || 0,
+                    color: "#c8945a",
+                  },
+                  {
+                    code: "200",
+                    label: "ACID",
+                    korean: "산미",
+                    value: currentResult?.scores?.acid || 0,
+                    color: "#d4782a",
+                  },
+                  {
+                    code: "300",
+                    label: "SWEET",
+                    korean: "단맛",
+                    value: currentResult?.scores?.sweet || 0,
+                    color: "#c8a87a",
+                  },
+                  {
+                    code: "400",
+                    label: "BITTER",
+                    korean: "쓴맛",
+                    value: currentResult?.scores?.bitter || 0,
+                    color: "#9b7d5b",
+                  },
+                  {
+                    code: "500",
+                    label: "HEAT",
+                    korean: "매운맛",
+                    value: currentResult?.scores?.heat || 0,
+                    color: "#e05a2b",
+                  },
+                  {
+                    code: "600",
+                    label: "HERB",
+                    korean: "허브",
+                    value: currentResult?.scores?.herb || 0,
+                    color: "#8aaa5a",
+                  },
+                  {
+                    code: "700",
+                    label: "SPICE",
+                    korean: "향신료",
+                    value: currentResult?.scores?.spice || 0,
+                    color: "#c96f2d",
+                  },
+                  {
+                    code: "800",
+                    label: "LIPID",
+                    korean: "지방감",
+                    value: currentResult?.scores?.lipid || 0,
+                    color: "#d4b483",
+                  },
+                  {
+                    code: "900",
+                    label: "TEXTURE",
+                    korean: "질감",
+                    value: currentResult?.scores?.texture || 0,
+                    color: "#b89b6a",
+                  },
+                ];
 
-              ctx.fillStyle = "#737373";
-              ctx.font = "30px sans-serif";
-              ctx.fillText("당신의 양념장은", 80, 1560);
-              ctx.fillText("어떤 맛 구조일까?", 80, 1610);
+                const barStartY = 670;
+                const barX = 80;
+                const barW = 820;
+                const barH = 26;
+                const gap = 76;
 
-              ctx.fillStyle = "#ffffff";
-              ctx.font = "bold 52px sans-serif";
-              ctx.fillText("LOIA", 80, 1760);
+                axes.forEach((axis, i) => {
+                  const y = barStartY + i * gap;
 
-              ctx.fillStyle = "#737373";
-              ctx.font = "26px sans-serif";
-              ctx.fillText("Kitchen Diagnosis Beta", 80, 1810);
+                  // label
+                  ctx.fillStyle = "#f0e0c8";
+                  ctx.font = "bold 32px sans-serif";
 
-              const imageUrl = canvas.toDataURL("image/png");
+                  ctx.fillText(axis.label, barX, y - 18);
 
-              const link = document.createElement("a");
-              link.href = imageUrl;
-              link.download = "loia-story-diagnosis.png";
-              link.click();
-            }}
-            className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
-          >
-            스토리 이미지 저장
-          </button>
+                  ctx.fillStyle = "rgba(220,180,130,0.6)";
+                  ctx.font = "24px sans-serif";
 
-          <button type="button"
-            onClick={async () => {
-              const currentResult = result as any;
-              const shareText = [
-                "당신의 양념장은 어떤 맛 구조일까?",
-                "",
-                "LOIA Kitchen Diagnosis",
-              ].join("\n");
-              const shareData = {
-                title: "LOIA Kitchen Diagnosis",
-                text: shareText,
-                url: "https://loia-kitchen-diagnosis.vercel.app/",
-              };
+                  ctx.fillText(axis.korean, barX + 180, y - 18);
 
-              try {
-                const nav = navigator as Navigator & {
-                  share?: (data: ShareData) => Promise<void>;
+                  // track
+                  ctx.fillStyle = "rgba(255,255,255,0.08)";
+
+                  ctx.beginPath();
+                  ctx.roundRect(barX, y, barW, barH, 20);
+                  ctx.fill();
+
+                  // fill
+                  const normalized = axis.value / 120;
+
+                  const fillW = Math.max(
+                    25,
+                    Math.pow(normalized, 0.4) * barW
+                  );
+
+                  const grad = ctx.createLinearGradient(
+                    barX,
+                    y,
+                    barX + fillW,
+                    y
+                  );
+
+                  grad.addColorStop(0, axis.color + "aa");
+                  grad.addColorStop(1, axis.color);
+
+                  ctx.fillStyle = grad;
+
+                  ctx.beginPath();
+                  ctx.roundRect(barX, y, fillW, barH, 20);
+                  ctx.fill();
+
+                  // value
+                  ctx.fillStyle = "rgba(220,180,130,0.7)";
+                  ctx.font = "bold 24px sans-serif";
+
+                  ctx.fillText(
+                    String(Math.round(axis.value)),
+                    940,
+                    y + 6
+                  );
+                });
+
+                // CTA 영역
+                ctx.strokeStyle = "rgba(200,140,60,0.18)";
+                ctx.lineWidth = 1;
+
+                ctx.beginPath();
+                ctx.moveTo(80, 1450);
+                ctx.lineTo(1000, 1450);
+                ctx.stroke();
+
+                // 질문
+                ctx.fillStyle = "#f0e0c8";
+                ctx.font = "bold 72px sans-serif";
+
+                ctx.fillText("당신의 주방은?", 80, 1550);
+
+                // 설명
+                ctx.fillStyle = "rgba(180,140,90,0.7)";
+                ctx.font = "32px sans-serif";
+
+                ctx.fillText(
+                  "양념 사진 하나로 알 수 있어요",
+                  80,
+                  1610
+                );
+
+                // 버튼 느낌
+                // 첫번째 pill
+                ctx.fillStyle = "rgba(255,255,255,0.06)";
+                ctx.beginPath();
+                ctx.roundRect(80, 1660, 225, 70, 40);
+                ctx.fill();
+
+                ctx.strokeStyle = "rgba(200,140,60,0.25)";
+                ctx.beginPath();
+                ctx.roundRect(80, 1660, 225, 70, 40);
+                ctx.stroke();
+
+                ctx.fillStyle = "#e0b07a";
+                ctx.font = "bold 28px sans-serif";
+
+                ctx.fillText("10축 맛 분석", 120, 1705);
+
+                // 두번째 pill
+                ctx.fillStyle = "rgba(255,255,255,0.06)";
+
+                ctx.beginPath();
+                ctx.roundRect(370, 1660, 235, 70, 40);
+                ctx.fill();
+
+                ctx.strokeStyle = "rgba(200,140,60,0.25)";
+
+                ctx.beginPath();
+                ctx.roundRect(370, 1660, 235, 70, 40);
+                ctx.stroke();
+
+                ctx.fillStyle = "#e0b07a";
+
+                ctx.fillText("30초 주방 진단", 405, 1705);
+
+                // 세번째 pill
+                ctx.fillStyle = "rgba(255,255,255,0.06)";
+
+                ctx.beginPath();
+                ctx.roundRect(670, 1660, 230, 70, 40);
+                ctx.fill();
+
+                ctx.strokeStyle = "rgba(200,140,60,0.25)";
+
+                ctx.beginPath();
+                ctx.roundRect(670, 1660, 230, 70, 40);
+                ctx.stroke();
+
+                ctx.fillStyle = "#e0b07a";
+
+                ctx.fillText("양념 구조화", 720, 1705);
+
+                // 인스타
+                ctx.fillStyle = "rgba(220,170,100,0.8)";
+                ctx.font = "bold 30px sans-serif";
+
+                ctx.fillText("@loia.system", 80, 1830);
+
+
+                const imageUrl = canvas.toDataURL("image/png");
+
+                const link = document.createElement("a");
+                link.href = imageUrl;
+                link.download = "loia-story-diagnosis.png";
+                link.click();
+              }}
+              className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white"
+            >
+              스토리 이미지 저장
+            </button>
+
+            <button type="button"
+              onClick={async () => {
+                const currentResult = result as any;
+                const shareText = [
+                  "당신의 양념장은 어떤 맛 구조일까?",
+                  "",
+                  "LOIA Kitchen Diagnosis",
+                ].join("\n");
+                const shareData = {
+                  title: "LOIA Kitchen Diagnosis",
+                  text: shareText,
+                  url: "https://loia-kitchen-diagnosis.vercel.app/",
                 };
 
-                if (nav.share) {
-                  await nav.share(shareData);
-                } else if (navigator.clipboard) {
-                  await navigator.clipboard.writeText(
-                    `${shareText}
+                try {
+                  const nav = navigator as Navigator & {
+                    share?: (data: ShareData) => Promise<void>;
+                  };
+
+                  if (nav.share) {
+                    await nav.share(shareData);
+                  } else if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(
+                      `${shareText}
 
                   ${shareData.url}`
-                  );
-                  alert("공유 문구와 링크가 복사되었습니다.");
-                } else {
-                  alert("공유 기능을 사용할 수 없습니다. 주소창의 링크를 직접 복사해주세요.");
+                    );
+                    alert("공유 문구와 링크가 복사되었습니다.");
+                  } else {
+                    alert("공유 기능을 사용할 수 없습니다. 주소창의 링크를 직접 복사해주세요.");
+                  }
+                } catch (error) {
+                  console.log("공유가 취소되었거나 실패했습니다.", error);
                 }
-              } catch (error) {
-                console.log("공유가 취소되었거나 실패했습니다.", error);
-              }
-            }}
-            className="w-full rounded-full bg-[#1f1a14] px-5 py-4 text-white font-semibold text-black hover:bg-[#3a3027] transition-colors duration-200">
-            친구에게 공유하기
-          </button>
+              }}
+              className="w-full rounded-full bg-[#1f1a14] px-5 py-4 text-white font-semibold text-black hover:bg-[#3a3027] transition-colors duration-200">
+              친구에게 공유하기
+            </button>
 
-          <a
-            href="https://www.instagram.com/loia.system/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white">
-            LOIA Instagram
-          </a>
+            <a
+              href="https://www.instagram.com/loia.system/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full border border-[#1f1a14] px-5 py-4 text-center text-sm font-semibold text-[#1f1a14] hover:bg-[#1f1a14] hover:text-white">
+              LOIA Instagram
+            </a>
 
+          </div>
         </div>
-      </div>
 
-      <footer className="mt-12 border-t border-neutral-800 pt-6 text-sm text-neutral-600">
-        <p className="mt-8 whitespace-pre-line text-xs leading-6 text-neutral-500">
-          {`현재 LOIA Kitchen Diagnosis는 베타 테스트 버전입니다.
+        <footer className="mt-12 border-t border-neutral-800 pt-6 text-sm text-neutral-600">
+          <p className="mt-8 whitespace-pre-line text-xs leading-6 text-neutral-500">
+            {`현재 LOIA Kitchen Diagnosis는 베타 테스트 버전입니다.
               사진 인식과 재료 매칭은 완벽하지 않을 수 있으며, 진단 결과는 참고용입니다.
               업로드한 사진 원본은 저장하지 않으며, 양념명 인식과 주방 진단을 위한 분석 목적으로만 사용됩니다.
               다만 서비스 개선을 위해 입력한 양념명, AI 인식 결과, 찾은 재료, 찾지 못한 재료, 진단 결과는 저장될 수 있습니다.`}
-        </p>
-      </footer>
-    </section>
+          </p>
+        </footer>
+      </section>
     </main >
   );
 }
