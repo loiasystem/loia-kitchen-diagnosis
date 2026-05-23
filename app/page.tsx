@@ -6,6 +6,8 @@ import FlavorRadar from "./components/FlavorRadar";
 
 type DiagnosisResult = {
   kitchenType: string;
+  ingredientCount: number;
+  flavorSpectrum: string;
   scores?: any;
   strongAxes: string[];
   supportingAxes: string[];
@@ -67,10 +69,7 @@ export default function Home() {
       : null;
 
   const ingredientCount =
-    result?.summary
-      ?.split("찾은 재료:")[1]
-      ?.split("찾지 못한 재료:")[0]
-      ?.split(",").length || 1;
+  result?.ingredientCount || 0;
 
   const flavorLevel =
     Math.min(
@@ -250,33 +249,6 @@ export default function Home() {
     })()
     : {};
 
-  const flavorSpectrum = result?.scores
-    ? (() => {
-      const values = Object.values(result.scores).map(Number);
-
-      const average =
-        values.reduce((a, b) => a + b, 0) / values.length;
-
-      const variance =
-        values.reduce(
-          (sum, value) => sum + Math.pow(value - average, 2),
-          0
-        ) / values.length;
-
-      const coverageFactor = Math.min(
-        1,
-        ingredientCount / 12
-      );
-
-      const balanceScore =
-        Math.max(
-          0,
-          10 - variance / 200
-        ) * coverageFactor;
-
-      return balanceScore.toFixed(1);
-    })()
-    : "0.0";
 
   return (
     <main className="min-h-screen bg-[#f4efe6] text-[#1f1a14]">
@@ -420,8 +392,8 @@ export default function Home() {
 
                 <div className="mt-3 flex flex-1 items-center gap-2">
                   <span className="text-5xl font-bold text-[#1f1a14]">
-                    {flavorSpectrum}
-                  </span>
+  {result.flavorSpectrum}
+</span>
 
                   <span className="mb-1 text-sm text-[#7a746b]">
                     /10

@@ -157,8 +157,8 @@ export async function POST(request: Request) {
     );
 
     const selectedIngredients = testIngredients.filter((ingredient) => {
-        const ingredientName = (ingredient.name || "").replace(/\s/g, "");
-        const ingredientCode = (ingredient.code || "").replace(/\s/g, "");
+        const ingredientName = ingredient.name.replace(/\s/g, "");
+        const ingredientCode = ingredient.code.replace(/\s/g, "");
 
         return normalizedSelectedNames.some((name) =>
             ingredientName === name ||
@@ -166,16 +166,14 @@ export async function POST(request: Request) {
         );
     });
 
-    const foundNames = selectedIngredients.map(
-        (ingredient) => ingredient.name
-    );
+    const foundNames = selectedIngredients.map((ingredient) => ingredient.name);
 
     // 선택된 재료들의 metadata 연결
     const selectedIngredientMetadata = ingredientMetadata.filter(
         (item: any) => {
             const metadataName = item.Name_KR?.replace(/\s/g, "");
             return selectedIngredients.some((ingredient) =>
-                (ingredient.name || "").replace(/\s/g, "") === metadataName
+                ingredient.name.replace(/\s/g, "") === metadataName
             );
         }
     );
@@ -233,9 +231,7 @@ export async function POST(request: Request) {
         AxisKey,
         number
     ][];
-    const nonZeroAxes = sortedAxes.filter(
-        ([axis, score]) => axis !== "texture" && score > 0
-    );
+    const nonZeroAxes = sortedAxes.filter(([, score]) => score > 0);
 
     // 전체 축 평균값 계산
     // 현재 주방의 전체 맛 분포 기준선으로 사용
@@ -264,10 +260,8 @@ export async function POST(request: Request) {
     // 현재 주방의 중심 맛 구조(PRIMARY)로 판단
     const strongAxes = Object.entries(primaryScores)
         .sort((a, b) => b[1] - a[1])
-        .filter(
-            ([axis]) =>
-                axis !== "texture" &&
-                axisIngredientCounts[axis as AxisKey] >= 1
+        .filter(([axis]) =>
+            axisIngredientCounts[axis as AxisKey] >= 1
         )
         .slice(0, 2)
         .map(([axis]) => axisLabels[axis as AxisKey]);
@@ -428,7 +422,6 @@ export async function POST(request: Request) {
     console.log("recommendation:", recommendation);
 
     // Flavor Narrative 생성
-    // GPT에게 보내는 지시문
     const flavorPrompt = `
 너는 LOIA의 맛 구조 해석가다.
 너의 역할은 사용자의 양념 목록을 바탕으로
@@ -474,60 +467,12 @@ export async function POST(request: Request) {
 
 [출력 필드]
 
-KitchenType:
-- 사용자의 주방 맛 구조를 대표하는 유형 이름
-- 첫 화면에서 가장 먼저 보이는 대표 문구
-- 브랜드형 구조 이름처럼 짧고 기억에 남아야 한다
-- 실제 사람이 읽었을 때 자연스러워야 한다
-- 억지 조어처럼 보이면 안 된다
-- 단어를 과하게 나열하지 않는다
-- 2개 이상의 수식어를 연속으로 길게 붙이지 않는다
-- 중심 맛과 받쳐주는 맛의 방향성이 은근히 느껴져야 한다
-- 실제 요리 습관이나 조리 방향성이 떠오를 수 있어야 한다
-- 단순히 "매운맛 중심형 주방"처럼 기계적으로 쓰지 않는다
-- "~형 주방", "~스타일 주방", "~구조 주방" 등 자연스러운 형태 가능
-- 너무 시적이거나 감성적으로 과장하지 않는다
-- "가미형", "복합형", "확장형", "균형형" 같은 기계적 표현은 최소화한다
-- 사람이 실제로 기억하고 공유할 수 있는 이름이어야 한다
-- 8~18자 내외 권장
-- 핵심 인상 하나를 남기는 방식이 좋다
-
-좋은 예시:
-- 발효 감칠형 주방
-- 직화 감칠형 주방
-- 진한 양념형 주방
-- 허브 중심형 주방
-- 산미 보완형 주방
-
-나쁜 예시:
-- 감칠단단 발효향 가미형 주방
-- 복합 감칠 균형형 구조
-- 향신 확장형 복합 주방
-
 subtitle:
-- KitchenType을 반복 설명하지 않는다
-- 설명문처럼 길게 늘어놓지 않는다
-- 현재 주방의 요리 흐름이나 반복되는 맛 습관을 한 줄로 관찰하듯 표현한다
-- 구조 설명보다 실제 사용감이 느껴져야 한다
-- 사용자가 "아 그래서 내 요리가 비슷했구나" 느낄 수 있어야 한다
-- 너무 분석 리포트처럼 딱딱하지 않게 작성한다
-- 그렇다고 감성 카피처럼 과장하지도 않는다
-- 캡처했을 때 공감되거나 기억에 남는 문장이어야 한다
-- 너무 시적이거나 추상적으로 쓰지 않는다
-- 실제 요리 장면이 떠오를 정도의 현실감이 있으면 좋다
-- 20~40자 내외 권장
-- 한 문장 안에는 하나의 관찰만 담는 것이 좋다
-
-좋은 예시:
-- 강한 양념이 요리의 중심을 오래 끌고 가는 구조입니다
-- 감칠맛이 먼저 앞으로 나오는 요리를 자주 만드는 편입니다
-- 익숙한 간과 농도로 맛 방향이 안정되는 주방입니다
-- 향보다는 간과 깊이를 우선하는 흐름이 강한 편입니다
-
-나쁜 예시:
-- 당신의 주방은 감칠과 단맛이 조화를 이루는 구조입니다
-- 풍부한 향과 복합적인 균형감이 인상적인 주방입니다
-- 깊고 완성도 높은 맛의 방향성을 가지고 있습니다
+- 한 줄 요약
+- 사용자가 캡처하고 싶을 만한 문장
+- "당신의 주방은 ~한 주방입니다" 형식 권장
+- 20~35자 내외
+- 너무 시적이지 않게
 
 profile:
 - 4~6문장
@@ -563,16 +508,22 @@ expansion:
 [현재 맛 구조]
 중심 맛:
 ${flavorSummary.dominantAxes.join(", ")}
+
 받쳐주는 맛:
 ${flavorSummary.supportingAxes.join(", ")}
+
 부족한 맛:
 ${flavorSummary.weakAxes.join(", ")}
+
 스타일 태그:
 ${flavorSummary.styleTags.join(", ")}
+
 잘 맞는 요리 방향:
 ${flavorSummary.compatibleCuisine.join(", ")}
+
 사용 재료:
 ${foundNames.join(", ")}
+
 미인식 재료:
 ${missingNames?.join(", ") || "없음"}
 
@@ -581,108 +532,75 @@ JSON key는 영어로 유지하되, value 안의 문장은 반드시 한국어�
 JSON 외의 설명, 마크다운, 코드블록은 절대 쓰지 마라.
 
 {
-  "KitchenType": "...",
   "subtitle": "...",
   "profile": "...",
   "expansion": "..."
 }
 `;
-    // OpenAI flavor narrative 생성
-    // 사용자의 양념 구조를 바탕으로 주방 유형, 한줄 요약, 맛 해설을 생성
-    // GPT에게 실제로 요청 보내기 
     const narrativeResponse = await openai.responses.create({
         model: "gpt-4.1-mini",
         input: flavorPrompt,
     });
 
-    // GPT 응답(JSON 문자열)을
-    // JavaScript 객체로 변환
     const parsed = JSON.parse(
         narrativeResponse.output_text || "{}"
     );
 
-    // 캡처용 한줄 요약
     const flavorSubtitle =
         parsed.subtitle || "";
 
-    // 현재 주방의 맛 구조 해설
     const flavorNarrative =
         parsed.profile || "";
 
-    // 부족한 맛 보완 및 확장 방향 해설
     const flavorExpansionNarrative =
         parsed.expansion || "";
 
-    // OpenAI 기반 주방 유형 naming
-    // flavor 조합 기반으로 생성된 대표 유형명
-    const kitchenType =
-        parsed.KitchenType || "LOIA 주방";
+    const mainAxis = strongAxes[0] || "";
 
-
-    // Flavor Spectrum
-    // 현재 주방의 맛 구조가
-    // 얼마나 넓고 안정적으로 형성되어 있는지 계산
-    //
-    // 1. 맛 축 분산도(variance)
-    // → 특정 맛 편중 여부 측정
-    //
-    // 2. 재료 보유량(coverageFactor)
-    // → 실제 확장 가능한 맛 기반 규모 측정
-    //
-    // 높은 점수:
-    // - 여러 맛 축이 비교적 안정적으로 형성됨
-    // - 다양한 조합 확장 가능
-    //
-    // 낮은 점수:
-    // - 특정 맛 축 편중
-    // - 반복적인 맛 구조 가능성 높음
-    //
-    // ※ 맛있음 점수나 요리 실력 평가가 아니라
-    // "맛 구조의 안정성과 확장성" 지표에 가까움
-    const flavorSpectrum = total
-        ? (() => {
-            const values = Object.values(total).map(Number);
-            const average =
-                values.reduce((a, b) => a + b, 0) / values.length;
-            const variance =
-                values.reduce(
-                    (sum, value) => sum + Math.pow(value - average, 2),
-                    0
-                ) / values.length;
-            const coverageFactor = Math.min(
-                1,
-                foundNames.length / 12
-            );
-            const balanceScore =
-                Math.max(
-                    0,
-                    10 - variance / 70
-                ) * coverageFactor;
-
-            return balanceScore.toFixed(1);
-        })()
-        : "0.0";
-
-
-    // Flavor document 생성
-    // 화면 출력 + 저장에 공통 사용되는
-    // LOIA 진단 결과 구조
+    const kitchenType = mainAxis.includes("Salty")
+        ? "염도 중심형 주방"
+        : mainAxis.includes("Umami")
+            ? "감칠맛 중심형 주방"
+            : mainAxis.includes("Acid")
+                ? "산미 중심형 주방"
+                : mainAxis.includes("Sweet")
+                    ? "단맛 중심형 주방"
+                    : mainAxis.includes("Bitter")
+                        ? "쓴맛 중심형 주방"
+                        : mainAxis.includes("Heat")
+                            ? "매운맛 중심형 주방"
+                            : mainAxis.includes("Herb")
+                                ? "허브 중심형 주방"
+                                : mainAxis.includes("Spice")
+                                    ? "향신료 중심형 주방"
+                                    : mainAxis.includes("Lipid")
+                                        ? "지방감 중심형 주방"
+                                        : mainAxis.includes("Texture")
+                                            ? "질감 중심형 주방"
+                                            : "LOIA 진단형 주방";
     const result = {
         kitchenType,
         strongAxes,
         supportingAxes,
         weakAxes,
-        ingredientCount: foundNames.length,
         scores: total,
-        flavorSpectrum,
         recommendation,
         flavorSummary,
         flavorNarrative,
         flavorExpansionNarrative,
         flavorSubtitle,
 
+        summary:
+            selectedIngredients.length > 0
+                ? `찾은 재료: ${foundNames.join(", ")}
+찾지 못한 재료: ${missingNames.length > 0 ? missingNames.join(", ") : "없음"}
+사진 파일: ${imageInfo}
+분석 방식: 찾은 재료의 맛 축 점수를 합산한 뒤 강한 축, 보조 축, 부족한 축을 계산했습니다.`
+                : `찾은 재료: 없음
+찾지 못한 재료: ${missingNames.length > 0 ? missingNames.join(", ") : "없음"}
+사진 파일: ${imageInfo}
+분석 방식: 입력된 재료 중 DB에서 찾을 수 있는 재료가 없습니다.`,
     };
-
 
     const isTest =
         request.headers.get("host")?.includes("localhost");
@@ -690,37 +608,15 @@ JSON 외의 설명, 마크다운, 코드블록은 절대 쓰지 마라.
     const { error: insertError } = await supabase
         .from("loia_diagnosis_logs")
         .insert({
+            user_input: inputText,
+            ai_detected: detectedIngredientText,
+            found_ingredients: foundNames,
+            missing_ingredients: missingNames,
+            strong_axes: strongAxes,
+            supporting_axes: supportingAxes,
+            weak_axes: weakAxes,
+            summary: result.summary,
             is_test: isTest,
-            kitchen_type: result.kitchenType,
-            diagnosis_data: {
-                //입력
-                input_ingredients: inputText,
-                ai_detected: detectedIngredientText,
-                //재료 결과
-                found_ingredients: foundNames,
-                missing_ingredients: missingNames,
-                ingredient_count: foundNames.length,
-                flavorSpectrum: flavorSpectrum,
-
-                //flavor 구조 
-                scores: result.scores,
-
-                strong_axes: strongAxes,
-                supporting_axes: supportingAxes,
-                weak_axes: weakAxes,
-                //유형
-                kitchen_type: result.kitchenType,
-
-                //추천 확장 아이템도 시스템 안정화 되면 추가
-                // recommended_ingredients: recommendedItems,
-
-
-                //해설 
-                flavor_subtitle: result.flavorSubtitle,
-                flavor_narrative: result.flavorNarrative,
-                flavor_expansion: result.flavorExpansionNarrative,
-
-            }
         });
 
     if (insertError) {
@@ -728,4 +624,6 @@ JSON 외의 설명, 마크다운, 코드블록은 절대 쓰지 마라.
     }
     console.log("RESULT CHECK:", result);
     return NextResponse.json(result);
+
+
 } 

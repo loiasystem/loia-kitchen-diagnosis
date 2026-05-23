@@ -32,7 +32,7 @@ export default function FlavorRadar({ scores, previousScores }) {
                         <PolarAngleAxis dataKey="subject" />
                         <PolarRadiusAxis
                             angle={30}
-                            domain={[0, 100]}
+                            domain={[0, 10]}
                             tick={{ fontSize: 10, fill: "#9a9084" }}
                         />
                         {hasPrevious && (
